@@ -1,0 +1,117 @@
+<template>
+  <!-- text-black -->
+  <v-app-bar density="compact" class="position-fixed" :elevation="0">
+    <template v-slot:prepend>
+      <v-app-bar-nav-icon @click="emit('toggleNavigationDrawer')">
+      </v-app-bar-nav-icon>
+
+      <!-- <v-sheet elevation="6">
+        <v-tabs
+          bg-color="indigo"
+          next-icon="mdi-arrow-right-bold-box-outline"
+          prev-icon="mdi-arrow-left-bold-box-outline"
+          show-arrows
+          height="34px"
+        >
+          <v-tab v-for="i in 30" :key="i" :text="`Item ${i}`"></v-tab>
+        </v-tabs>
+      </v-sheet> -->
+    </template>
+    <!-- <template v-slot:extension> -->
+    <!--   <v-tabs align-tabs="title" v-if="tabs.length > 0"> -->
+    <!--     <v-tab -->
+    <!--       v-for="tab in tabs" -->
+    <!--       :key="tab.to" -->
+    <!--       :to="tab.to" -->
+    <!--       :text="tab.text" -->
+    <!--       :value="tab.to" -->
+    <!--     ></v-tab> -->
+    <!--   </v-tabs> -->
+    <!--   <FilterButtons /> -->
+    <!-- </template> -->
+
+    <!-- <v-app-bar-title style="font-family: Lobster; font-size: 26px"> -->
+    <!-- <v-img width="170" src="/marionette2.png" /> -->
+    <!-- {{ title }} -->
+    <!-- {{ props.title }} -->
+    <v-app-bar-title>
+      <!-- Dashboard  -->
+      <v-tabs v-if="tabs.length > 0">
+        <v-tab
+          v-for="tab in tabs"
+          :key="tab.to"
+          :to="tab.to"
+          :text="tab.text"
+          :value="tab.to"
+        ></v-tab>
+      </v-tabs>
+    </v-app-bar-title>
+    <!-- <v-text-field -->
+    <!--   density="compact" -->
+    <!--   :placeholder="$t('search')" -->
+    <!--   prepend-inner-icon="mdi-magnify" -->
+    <!--   variant="solo" -->
+    <!--   width="200" -->
+    <!--   flat -->
+    <!--   hide-details -->
+    <!--   single-line -->
+    <!-- ></v-text-field> -->
+    <v-col cols="12" sm="6" md="3" v-show="!smAndDown">
+      <SearchInput class="mr-4" />
+    </v-col>
+    <!-- <SearchInputDialog class="mr-4" /> -->
+    <template v-slot:append>
+      <!-- FIXME rtl not working properly -->
+      <div class="d-flex justify-space-between align-center">
+        <div class="mr-4">
+          <v-icon
+            icon="mdi-account-multiple"
+            @click="emit('toggleUsersDrawer')"
+          />
+        </div>
+        <div>
+          <Notifications />
+        </div>
+        <div class="mr-1">
+          <ToggleTheme />
+        </div>
+        <div class="mr-4">
+          <ChangeLanguage />
+        </div>
+      </div>
+    </template>
+  </v-app-bar>
+</template>
+
+<script lang="ts" setup>
+const tab = ref(null);
+import { useDisplay } from "vuetify";
+
+const { smAndDown } = useDisplay();
+
+interface Tab {
+  text: string;
+  to: string;
+}
+
+const props = withDefaults(
+  defineProps<{
+    tabs: Tab[];
+    title: string;
+  }>(),
+  {
+    tabs: [],
+  },
+);
+
+const emit = defineEmits<{
+  (e: "toggleNavigationDrawer"): void;
+  (e: "toggleUsersDrawer"): void;
+}>();
+</script>
+
+<!-- <script setup lang="ts"> -->
+<!-- import { useTheme } from "vuetify"; -->
+
+<!-- const theme = useTheme(); -->
+<!-- </script> -->

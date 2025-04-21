@@ -1,0 +1,344 @@
+<!-- TODO add search ability and click on user to contact and other info -->
+<template>
+  <!-- <v-expansion-panels> -->
+  <!--   <v-expansion-panel -->
+  <!--     text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima" -->
+  <!--   > -->
+  <!--     <template v-slot:title> -->
+  <!--       <v-icon class="blinking-icon" color="green" icon="mdi-account-group" /> -->
+  <!--       &nbsp; Active Users &nbsp; (228) -->
+  <!--     </template> -->
+  <!--     <template v-slot:text> -->
+  <v-card
+    class="mx-10 pb-2 d-flex flex-column"
+    height="780"
+    flat
+    density="compact"
+  >
+    <!-- <v-icon class="blinking-icon" color="green" icon="mdi-circle" /> -->
+    <!-- <template v-slot:prepend> -->
+    <!--   <v-icon icon="mdi-account" /> -->
+    <!-- </template> -->
+
+    <v-toolbar class="px-4" height="54">
+      <v-icon class="cursor-pointer mr-4" color="grey"
+        >mdi-help-circle-outline</v-icon
+      >
+      <div class="text-h6">Active Users</div>
+      <div class="text-h6 mx-2">(25)</div>
+      <v-spacer />
+      <v-text-field
+        v-model="search"
+        class="mt-6"
+        max-width="400"
+        label="Search User | group | status : using app"
+        menu-icon=""
+        density="compact"
+        variant="outlined"
+        prepend-inner-icon="mdi-magnify"
+        auto-select-first
+        item-props
+        border
+      ></v-text-field>
+      <v-btn variant="flat" class="ml-3 mt-1"> Search </v-btn>
+    </v-toolbar>
+    <!-- <v-card-title class="d-flex align-center pe-2"> -->
+    <!--   <v-icon icon="mdi-account"></v-icon> &nbsp; Active Users -->
+    <!--   <v-spacer></v-spacer> -->
+
+    <!--   <v-text-field -->
+    <!--     v-model="search" -->
+    <!--     density="compact" -->
+    <!--     label="Search Users" -->
+    <!--     prepend-inner-icon="mdi-magnify" -->
+    <!--     variant="solo-filled" -->
+    <!--     flat -->
+    <!--     hide-details -->
+    <!--     single-line -->
+    <!--   ></v-text-field> -->
+    <!-- </v-card-title> -->
+
+    <!-- <template v-slot:subtitle> -->
+    <!--   Users who are active according to filters -->
+    <!-- </template> -->
+    <!-- <v-container -->
+    <!--   :max-height="cardHeight" -->
+    <!--   :min-width="minWidth" -->
+    <!--   :max-width="maxWidth" -->
+    <!--   class="pa-0 overflow-y-auto overflow-x-auto" -->
+    <!-- > -->
+    <v-card-text>
+      <!-- <v-list density="compact" class="d-flex flex-wrap"> -->
+      <v-row no-gutters>
+        <!-- <v-list-subheader>Group 1</v-list-subheader> -->
+        <v-col :md="4" v-for="(item, index) in paginatedItems" :key="index">
+          <v-card
+            style="border-left: 6px solid #006600"
+            rounded="lg"
+            density="compact"
+            class="mx-2 my-2"
+            hover
+            height="145"
+          >
+            <!-- <template v-slot:append> -->
+            <!-- </template> -->
+            <!-- <template v-slot:prepend> </template> -->
+            <div class="d-flex">
+              <div class="d-flex mt-2 mx-4 me-4">
+                <div class="me-2 mt-3">
+                  <v-tooltip
+                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+                    max-width="300"
+                    location="end"
+                  >
+                    <template v-slot:activator="{ props }">
+                      <v-avatar size="36" v-bind="props">
+                        <!-- <v-badge color="success" dot> -->
+                        <v-img :src="item.prependAvatar" />
+                        <!-- </v-badge> -->
+                      </v-avatar>
+                    </template>
+                  </v-tooltip>
+                </div>
+                <div class="d-flex flex-column mt-2">
+                  <div class="d-flex justify-space-between">
+                    <!-- <div class="d-flex"> -->
+                    <div class="me-2 font-weight-bold">
+                      {{ item.title }}
+                    </div>
+                    <!-- <v-icon color="green" icon="mdi-circle" /> -->
+                    <div class="text-green">Online</div>
+                  </div>
+                  <div
+                    class="d-flex flex-column text-grey justify-space-between"
+                  >
+                    <div>
+                      <div>Working On Project 1</div>
+                      <div class="me-2">1,300 requests</div>
+                      <div>2:10:30 Elapsed</div>
+                      <div>10:30 Unproductive</div>
+                    </div>
+
+                    <div>
+                      <div class="d-flex align-center mb-3">
+                        <!-- TODO adding mb-3 fixed the image temporarily -->
+                        Using: Firefox &nbsp;(
+                        <v-img
+                          max-width="26"
+                          src="/apps/apps/org.mozilla.Firefox.svg"
+                        />)
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="d-flex mt-2 mx-2 me-4"> -->
+              <!--   <div class="d-flex flex-column mt-2"> -->
+              <!--     <div class="d-flex flex-column"> -->
+              <!--       <div class="me-2">1,300 requests</div> -->
+              <!--       <div>2 hours spent</div> -->
+              <!--     </div> -->
+              <!--   </div> -->
+              <!-- </div> -->
+
+              <!-- <div class="d-flex flex-column flex-grow-1"> -->
+              <v-img cover :src="item.image" />
+              <!-- </div> -->
+            </div>
+            <!-- <template v-slot:append> -->
+            <!--   <v-icon color="green">mdi-circle</v-icon> -->
+            <!-- </template> -->
+          </v-card>
+        </v-col>
+      </v-row>
+      <!-- <v-list-subheader>Group 1</v-list-subheader> -->
+      <!-- <template v-slot:subtitle="{ subtitle }"> -->
+      <!--   <div v-html="subtitle"></div> -->
+      <!-- </template> -->
+      <!-- <template v-slot:append> -->
+      <!--   <v-icon color="green">mdi-circle</v-icon> -->
+      <!-- </template> -->
+      <!-- <template v-slot:title="{ title }"> -->
+      <!--   <div class="d-flex align-center"> -->
+      <!--     <span>{{ title }}</span> -->
+      <!--     <v-icon color="green">mdi-circle</v-icon> -->
+      <!--   </div> -->
+      <!-- </template> -->
+      <!-- </v-list> -->
+    </v-card-text>
+    <v-pagination
+      rounded
+      density="compact"
+      v-model="page"
+      :length="pageCount"
+    ></v-pagination>
+    <!-- </v-container> -->
+  </v-card>
+  <!--     </template> -->
+  <!--   </v-expansion-panel> -->
+  <!-- </v-expansion-panels> -->
+</template>
+
+<script lang="ts" setup>
+import { ref, onMounted, computed } from "vue";
+import axios from "axios";
+
+const itemsPerPage = 12;
+const page = ref(1);
+
+const items = ref([
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
+    title: "Ali",
+    // subtitle: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
+  },
+  // { type: "divider", inset: true },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+    title: "Summer BBQ",
+    // subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
+  },
+  // { type: "divider", inset: true },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
+    title: "Oui oui",
+    // subtitle:
+    // '<span class="text-primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
+  },
+  // { type: "divider", inset: true },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+    title: "Summer BBQ",
+    // subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+    title: "Summer BBQ",
+    // subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
+    title: "Summer BBQ",
+    // subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  {
+    prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
+    title: "Birthday gift",
+  },
+  // { type: "divider", inset: true },
+]);
+
+const paginatedItems = computed(() => {
+  const start = (page.value - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  return items.value.slice(start, end);
+});
+
+const pageCount = computed(() => {
+  return Math.ceil(items.value.length / itemsPerPage);
+});
+
+defineProps<{
+  cardHeight: number;
+  minWidth: number;
+  maxWidth: number;
+}>();
+
+const images = ref([]);
+
+async function fetchImages() {
+  try {
+    const response = await axios.get("http://localhost:8045/getimages");
+    images.value = response.data.map((imgSrc: string, index: string) => ({
+      id: index,
+      imgSrc: `http://localhost:8045${imgSrc}`,
+    }));
+    items.value = items.value.map((item) => ({
+      ...item,
+      image:
+        images.value[Math.floor(Math.random() * images.value.length)].imgSrc,
+    }));
+  } catch (error) {
+    console.error("Error fetching image list: ", error);
+  }
+}
+
+onMounted(fetchImages);
+</script>
+
+<!-- <style scoped> -->
+<!-- /* Define the blinking animation */ -->
+<!-- @keyframes blink { -->
+<!--   0% { -->
+<!--     opacity: 1; -->
+<!--   } -->
+<!--   50% { -->
+<!--     opacity: 0.4; -->
+<!--   } -->
+<!--   100% { -->
+<!--     opacity: 1; -->
+<!--   } -->
+<!-- } -->
+
+<!-- /* Apply the blinking animation to the icon */ -->
+<!-- .blinking-icon { -->
+<!--   animation: blink 2s infinite; -->
+<!-- } -->
+<!-- </style> -->
