@@ -2,7 +2,11 @@
   <div class="text-center">
     <v-menu v-model="menu">
       <template v-slot:activator="{ props }">
-        <v-icon v-bind="props">mdi-translate</v-icon>
+        <v-btn
+          v-tooltip:bottom="'Change Language'"
+          v-bind="props"
+          icon="mdi-translate"
+        ></v-btn>
       </template>
 
       <v-card>

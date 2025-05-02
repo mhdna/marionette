@@ -9,12 +9,8 @@
   <!--       &nbsp; Active Users &nbsp; (228) -->
   <!--     </template> -->
   <!--     <template v-slot:text> -->
-  <v-card
-    class="mx-10 pb-2 d-flex flex-column"
-    height="780"
-    flat
-    density="compact"
-  >
+  <!-- height="780" -->
+  <v-card class="mx-10 pb-2 d-flex flex-column" flat density="compact">
     <!-- <v-icon class="blinking-icon" color="green" icon="mdi-circle" /> -->
     <!-- <template v-slot:prepend> -->
     <!--   <v-icon icon="mdi-account" /> -->
@@ -25,7 +21,7 @@
         >mdi-help-circle-outline</v-icon
       >
       <div class="text-h6">Active Users</div>
-      <div class="text-h6 mx-2">(25)</div>
+      <!-- <div class="text-h6 mx-2">(25)</div> -->
       <v-spacer />
       <v-text-field
         v-model="search"
@@ -71,7 +67,13 @@
       <!-- <v-list density="compact" class="d-flex flex-wrap"> -->
       <v-row no-gutters>
         <!-- <v-list-subheader>Group 1</v-list-subheader> -->
-        <v-col :md="4" v-for="(item, index) in paginatedItems" :key="index">
+        <v-col
+          :md="4"
+          :sm="12"
+          :xs="12"
+          v-for="(item, index) in paginatedItems"
+          :key="index"
+        >
           <v-card
             style="border-left: 6px solid #006600"
             rounded="lg"
@@ -86,20 +88,20 @@
             <div class="d-flex">
               <div class="d-flex mt-2 mx-4 me-4">
                 <div class="me-2 mt-3">
-                  <v-tooltip
-                    text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
-                    max-width="300"
-                    location="end"
-                  >
-                    <template v-slot:activator="{ props }">
-                      <v-avatar size="36" v-bind="props">
-                        <!-- <v-badge color="success" dot> -->
-                        <v-img :src="item.prependAvatar" />
-                        <!-- </v-badge> -->
-                      </v-avatar>
-                    </template>
-                  </v-tooltip>
+                  <!--                   <v-tooltip -->
+                  <!--                     text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. -->
+                  <!-- Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. " -->
+                  <!--                     max-width="300" -->
+                  <!--                     location="end" -->
+                  <!--                   > -->
+                  <!--                     <template v-slot:activator="{ props }"> -->
+                  <v-avatar size="36" v-bind="props">
+                    <!-- <v-badge color="success" dot> -->
+                    <v-img :src="item.prependAvatar" />
+                    <!-- </v-badge> -->
+                  </v-avatar>
+                  <!-- </template> -->
+                  <!-- </v-tooltip> -->
                 </div>
                 <div class="d-flex flex-column mt-2">
                   <div class="d-flex justify-space-between">
@@ -108,7 +110,7 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
                       {{ item.title }}
                     </div>
                     <!-- <v-icon color="green" icon="mdi-circle" /> -->
-                    <div class="text-green">Online</div>
+                    <div class="text-green font-weight-bold">Online</div>
                   </div>
                   <div
                     class="d-flex flex-column text-grey justify-space-between"
@@ -142,9 +144,15 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
               <!--   </div> -->
               <!-- </div> -->
 
-              <!-- <div class="d-flex flex-column flex-grow-1"> -->
-              <v-img cover :src="item.image" />
-              <!-- </div> -->
+              <div class="d-flex flex-grow-1 position-relative">
+                <v-img class="hover-grow" cover :src="item.image" />
+                <div
+                  style="color: red; top: 40%; left: 25%"
+                  class="position-absolute"
+                >
+                  Open Stream
+                </div>
+              </div>
             </div>
             <!-- <template v-slot:append> -->
             <!--   <v-icon color="green">mdi-circle</v-icon> -->
@@ -190,7 +198,7 @@ const page = ref(1);
 const items = ref([
   {
     prependAvatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-    title: "Ali",
+    title: "Ali Buffer",
     // subtitle: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
   },
   // { type: "divider", inset: true },
@@ -322,6 +330,14 @@ async function fetchImages() {
 
 onMounted(fetchImages);
 </script>
+
+<style scoped>
+.hover-grow:hover {
+  filter: blur(1px);
+  /* transform: scaleX(1.05);  */
+  /* flex: 2; */
+}
+</style>
 
 <!-- <style scoped> -->
 <!-- /* Define the blinking animation */ -->

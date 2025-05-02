@@ -33,9 +33,12 @@ const options = ref({
     palette: "palette7",
   },
   chart: {
+    animations: {
+      enabled: false,
+    },
     id: "area-datetime",
     type: "area",
-    height: 160,
+    height: 200,
     zoom: {
       autoScaleYaxis: true,
     },
@@ -176,8 +179,8 @@ onMounted(fetchData);
 <template>
   <!-- <LoaderBox :loading="loading"> -->
   <!-- :type="type"> -->
-  <div id="chart">
-    <!-- <div class="toolbar">
+  <!-- <div id="chart"> -->
+  <!-- <div class="toolbar">
       <button
         id="one_month"
         @click="updateData('one_month')"
@@ -218,16 +221,17 @@ onMounted(fetchData);
         ALL
       </button>
     </div> -->
+  <!-- <line-chart :data="series" /> -->
 
-    <div id="chart-timeline">
-      <apexchart
-        type="area"
-        height="160"
-        ref="chart"
-        :options="options"
-        :series="series"
-      ></apexchart>
-    </div>
+  <div id="chart-timeline">
+    <apexchart
+      type="area"
+      height="200"
+      ref="chart"
+      :options="options"
+      :series="series"
+    ></apexchart>
   </div>
+  <!-- </div> -->
   <!-- </LoaderBox> -->
 </template>

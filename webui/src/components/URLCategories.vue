@@ -8,10 +8,7 @@
     </v-col>
     <!-- <v-divider v-if="!xsAndDown" vertical thickness="3" /> -->
     <v-col :md="6" :sm="6" :xs="12">
-      <CategoriesCard
-        title="Your Categories"
-        :categories="bannedUrlCategories"
-      />
+      <CategoriesCard :categories="bannedUrlCategories" />
     </v-col>
   </v-row>
 </template>
@@ -22,10 +19,10 @@ import { useDisplay } from "vuetify";
 const { xsAndDown } = useDisplay();
 
 const bannedUrlCategories = [
-  "Adware + malware",
-  "Social",
-  "Pornogoraphy",
-  "Gambling",
+  "Category 1",
+  "Category 2",
+  "Category 3",
+  "Category 4",
 ];
 </script>
 

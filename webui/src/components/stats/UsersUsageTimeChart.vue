@@ -1,8 +1,17 @@
 <template>
+  <!-- <bar-chart -->
+  <!--   :data="[ -->
+  <!--     ['X-Small', 5], -->
+  <!--     ['Small', 27], -->
+  <!--     ['hi', 33], -->
+  <!--     ['fi', 36], -->
+  <!--     ['it', 46], -->
+  <!--   ]" -->
+  <!-- ></bar-chart> -->
   <div id="chart">
     <apexchart
       type="bar"
-      height="350"
+      height="300"
       :options="chartOptions"
       :series="series"
     ></apexchart>
@@ -54,7 +63,7 @@ const updateChartOptions = () => {
 const chartOptions = ref({
   theme: {
     mode: currentTheme.value,
-    palette: "palette7",
+    palette: "palette10",
   },
   chart: {
     type: "bar",

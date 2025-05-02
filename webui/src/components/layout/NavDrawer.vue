@@ -11,16 +11,13 @@
     @update:model-value="emit('update:showDrawer', $event)"
     class="position-fixed"
   >
+    <!-- :temporary="isDock" -->
+    <!-- :model-value="isDock || props.showDrawer" -->
     <!-- TODO v-model="!mobile && drawer" -->
     <!-- <p class="text-center">{{ $t("layout.title") }}</p> -->
     <!-- prepend-avatar="/profile.jpg" -->
     <!-- <v-list-item subtitle="mahdi@mail.com" title="Papa Mahdi"> -->
     <template v-slot:prepend>
-      <v-toolbar height="35">
-        <v-spacer />
-        <v-btn icon="mdi-unfold-less-vertical" min-width="30" />
-        <v-btn icon="mdi-dock-window" min-width="30" />
-      </v-toolbar>
       <v-list>
         <v-list-item>
           <template v-slot:prepend>
@@ -56,7 +53,7 @@
       <!-- <SearchInputDialog class="mr-4" /> -->
       <!-- </v-list-item> -->
       <MenuItem
-        :isRail="props.isRail"
+        :isRail="isRail"
         v-for="item in items"
         :item="item"
         :key="item.text"
@@ -71,18 +68,35 @@
           :key="item.text"
         />
       </v-list>
+      <!-- <v-toolbar height="35"> -->
+      <!--   <v-spacer /> -->
+      <!--   <v-btn -->
+      <!--     v-tooltip:bottom="'Minimize menu'" -->
+      <!--     icon="mdi-unfold-less-vertical" -->
+      <!--     @click="toggleRail" -->
+      <!--     min-width="30" -->
+      <!--   /> -->
+      <!-- <v-btn -->
+      <!--   v-tooltip:bottom="'Undock menu'" -->
+      <!--   icon="mdi-dock-window" -->
+      <!--   @click="toggleDock" -->
+      <!--   min-width="30" -->
+      <!-- /> -->
+      <!-- </v-toolbar> -->
     </template>
   </v-navigation-drawer>
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
+
 const { t } = useI18n();
+
 import { useDisplay } from "vuetify";
 
 // const { mobile } = useDisplay();
-const isRail = ref(false);
+// const isRail = ref(false);
 
 interface MenuItem {
   text: string;
@@ -100,12 +114,19 @@ const bottomItems = computed<MenuItem[]>(() => [
     to: "/settings",
   },
   {
-    text: t("Report a bug"),
-    value: "bug",
+    text: t("Ask for Help"),
+    value: "help",
     // icon: "mid-account-group-outline",
-    icon: "mdi-bug",
+    icon: "mdi-help-circle-outline",
     to: "/bugs",
   },
+  // {
+  //   text: t("Report a bug"),
+  //   value: "bug",
+  //   // icon: "mid-account-group-outline",
+  //   icon: "mdi-bug",
+  //   to: "/bugs",
+  // },
   // { text: "Backups", icon: "mdi-cloud-upload" },
 ]);
 
@@ -113,8 +134,8 @@ const items = computed<MenuItem[]>(() => [
   {
     text: t("overview"),
     value: "overview",
-    icon: "mdi-monitor-dashboard",
-    // icon: "mdi-view-dashboard",
+    // icon: "mdi-monitor-dashboard",
+    icon: "mdi-view-dashboard",
     to: "/dashboard",
   },
   {
@@ -122,38 +143,44 @@ const items = computed<MenuItem[]>(() => [
     icon: "mdi-server-network",
     value: "proxy_config",
     to: "/proxy",
-    // subItems: [
-    //   {
-    //     text: "URL List",
-    //     value: "url_list",
-    //     icon: "mdi-link",
-    //     to: "/proxy/urls",
-    //   },
-    //   {
-    //     text: "Phrases",
-    //     value: "phrases",
-    //     icon: "mdi-file-word-box",
-    //     to: "/proxy/phrases",
-    //   },
-    //   {
-    //     text: "Redirects",
-    //     value: "redirects",
-    //     icon: "mdi-arrow-down-right",
-    //     to: "/proxy/redirects",
-    //   },
-    //   // {
-    //   //   text: "Safe Search",
-    //   //   value: "safesearch",
-    //   //   icon: "mdi-magnify",
-    //   //   to: "/proxy/safesearch",
-    //   // },
-    //   // {
-    //   //   text: "Manage Time",
-    //   //   value: "managetime",
-    //   //   icon: "mdi-clock",
-    //   //   to: "/proxy/times",
-    //   // },
-    // ],
+    subItems: [
+      {
+        text: "URL Lists",
+        value: "url_list",
+        icon: "mdi-link",
+        to: "/proxy/urls",
+      },
+      {
+        text: "Phrases",
+        value: "phrases",
+        icon: "mdi-file-word-box",
+        to: "/proxy/phrases",
+      },
+      {
+        text: "Redirects",
+        value: "redirects",
+        icon: "mdi-arrow-down-right",
+        to: "/proxy/redirects",
+      },
+      {
+        text: "Categories",
+        value: "categories",
+        icon: "mdi-shape",
+        to: "/proxy/categories",
+      },
+      // {
+      //   text: "Safe Search",
+      //   value: "safesearch",
+      //   icon: "mdi-magnify",
+      //   to: "/proxy/safesearch",
+      // },
+      // {
+      //   text: "Manage Time",
+      //   value: "managetime",
+      //   icon: "mdi-clock",
+      //   to: "/proxy/times",
+      // },
+    ],
   },
   {
     text: "App Limits",
@@ -161,12 +188,6 @@ const items = computed<MenuItem[]>(() => [
     icon: "mdi-application",
     to: "/applimits",
   },
-  // {
-  //   text: "Requests",
-  //   value: "acknowledgements",
-  //   icon: "mdi-email-newsletter",
-  //   to: "/acknowledgements",
-  // },
   // {
   //   text: t("apps"),
   //   value: "apps",
@@ -179,12 +200,18 @@ const items = computed<MenuItem[]>(() => [
   //   icon: "mdi-image-multiple",
   //   to: "/screenshots",
   // },
-  // {
-  //   text: "Live Chat",
-  //   value: "livechat",
-  //   icon: "mdi-chat",
-  //   to: "/chat",
-  // },
+  {
+    text: "Live Chat",
+    value: "livechat",
+    icon: "mdi-chat",
+    to: "/chat",
+  },
+  {
+    text: "Requests",
+    value: "acknowledgements",
+    icon: "mdi-email-newsletter",
+    to: "/acknowledgements",
+  },
   // {
   //   text: "Keyloggers",
   //   value: "keyloggers",
@@ -242,6 +269,10 @@ const props = defineProps<{
 
 const emit = defineEmits(["update:showDrawer"]);
 
+// const toggleRail = () => {
+//   isRail.value = !isRail.value;
+// };
+
 // const drawer = ref(true);
 
 // const toggle = () => {
@@ -249,6 +280,12 @@ const emit = defineEmits(["update:showDrawer"]);
 // };
 
 // defineExpose({ toggle });
+// const isDock = ref(false);
+
+// const toggleDock = () => {
+//   isDock.value = !isDock.value;
+//   emit("update:showDrawer", true);
+// };
 </script>
 
 <style>
@@ -284,7 +321,7 @@ const emit = defineEmits(["update:showDrawer"]);
 <!-- </v-app-bar>
 </template> -->
 
-<route lang="yaml">
-meta:
-  layout: proxy
-</route>
+<!-- <route lang="yaml"> -->
+<!-- meta: -->
+<!--   layout: proxy -->
+<!-- </route> -->

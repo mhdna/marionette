@@ -2,7 +2,10 @@
   <!-- text-black -->
   <v-app-bar density="compact" class="position-fixed" :elevation="0">
     <template v-slot:prepend>
-      <v-app-bar-nav-icon @click="emit('toggleNavigationDrawer')">
+      <v-app-bar-nav-icon
+        @click="emit('toggleNavigationDrawer')"
+        v-tooltip:bottom="'Toggle navigation drawer'"
+      >
       </v-app-bar-nav-icon>
 
       <!-- <v-sheet elevation="6">
@@ -35,16 +38,18 @@
     <!-- {{ title }} -->
     <!-- {{ props.title }} -->
     <v-app-bar-title>
-      <!-- Dashboard  -->
-      <v-tabs v-if="tabs.length > 0">
-        <v-tab
-          v-for="tab in tabs"
-          :key="tab.to"
-          :to="tab.to"
-          :text="tab.text"
-          :value="tab.to"
-        ></v-tab>
-      </v-tabs>
+      <div class="d-flex align-center">
+        <!-- <div style="font-family: serif; font-size: 20px">Marionette</div> -->
+        <v-tabs v-if="tabs.length > 0">
+          <v-tab
+            v-for="tab in tabs"
+            :key="tab.to"
+            :to="tab.to"
+            :text="tab.text"
+            :value="tab.to"
+          ></v-tab>
+        </v-tabs>
+      </div>
     </v-app-bar-title>
     <!-- <v-text-field -->
     <!--   density="compact" -->
@@ -63,19 +68,20 @@
     <template v-slot:append>
       <!-- FIXME rtl not working properly -->
       <div class="d-flex justify-space-between align-center">
-        <div class="mr-4">
-          <v-icon
-            icon="mdi-account-multiple"
-            @click="emit('toggleUsersDrawer')"
-          />
-        </div>
+        <v-btn
+          @click="emit('toggleUsersDrawer')"
+          v-tooltip:bottom="'Toggle Users Drawer'"
+        >
+          <b class="me-1">25/51</b>
+          <v-icon size="x-large" icon="mdi-account-multiple" />
+        </v-btn>
         <div>
           <Notifications />
         </div>
-        <div class="mr-1">
+        <div>
           <ToggleTheme />
         </div>
-        <div class="mr-4">
+        <div class="me-1">
           <ChangeLanguage />
         </div>
       </div>

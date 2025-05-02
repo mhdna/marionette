@@ -1,5 +1,6 @@
 <template>
-  <v-icon-btn
+  <v-btn
+    v-tooltip:bottom="'Undock menu'"
     :active="isActiveDrawer"
     icon="mdi-account-multiple"
     @click="toggleDrawer"

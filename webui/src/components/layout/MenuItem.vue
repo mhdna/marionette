@@ -25,9 +25,9 @@
     :ripple="false"
   >
     <!-- TODO change these -->
-    <!-- <template v-if="item.text === 'Proxy Configuration'" v-slot:append> -->
-    <!--   <v-badge color="red-darken-4" content="6" inline></v-badge> -->
-    <!-- </template> -->
+    <template v-if="item.text === 'Requests'" v-slot:append>
+      <v-badge color="red-darken-4" content="6" inline></v-badge>
+    </template>
     <template v-if="item.text === 'Live Chat'" v-slot:append>
       <v-badge color="green-darken-4" content="6" inline></v-badge>
     </template>

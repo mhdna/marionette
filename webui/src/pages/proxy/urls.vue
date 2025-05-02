@@ -4,70 +4,75 @@
 <!-- TODO: help notifications and help badges about url kinds (if a new user) -->
 <template>
   <!-- <v-container> -->
-  <v-container fluid class="pt-8">
-    <v-row class="mx-3">
-      <!-- <v-col :md="6"> -->
-
-      <!-- TODO support search using list="banned" or group="something" + using regexp -->
-      <v-text-field
-        v-model="search"
-        label="Search URL, group, or type"
-        density="compact"
-        menu-icon=""
-        variant="outlined"
-        border="sm"
-        prepend-inner-icon="mdi-magnify"
-        auto-select-first
-        item-props
-      ></v-text-field>
-      <!-- </v-col> -->
-      <!-- <v-spacer /> -->
-
-      <v-btn
-        class="pa-2 mx-2"
-        prepend-icon="mdi-plus"
-        height="42"
-        variant="text"
-        text="Add a URL"
-        border="sm"
-        @click="add"
-      ></v-btn>
-      <v-btn
-        class="pa-2 mx-2"
-        prepend-icon="mdi-tune"
-        height="42"
-        variant="text"
-        text="Manage categories"
-        border
-        @click="toggleCategoriesManagerDialog"
-      ></v-btn>
-    </v-row>
-  </v-container>
+  <!-- <v-row no-gutters> -->
+  <!--   <v-tabs fixed-tabs> -->
+  <!--     <v-tab -->
+  <!--       v-for="(list, index) in lists" -->
+  <!--       :text="list.name" -->
+  <!--       @click.prevent="activeTab = list.id" -->
+  <!--     ></v-tab> -->
+  <!--   </v-tabs> -->
+  <!-- </v-row> -->
   <v-container fluid>
     <!-- :style="`background-color: ${list.color}; color: black`" -->
-    <v-row no-gutters>
-      <v-col :md="4" v-for="(list, index) in lists">
-        <v-btn
-          :ripple="false"
-          :key="index"
-          :value="list.name"
-          @click.prevent="activeTab = list.id"
-          :prepend-icon="list.icon"
-          rounded="lg"
-          width="100%"
-          grow
-          :style="`border-bottom: 4px solid ${list.color}; color: ${list.color}`"
-        >
-          {{ list.name }}
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
-  <!-- </v-container> -->
+    <!-- <v-row class="mx-3"> -->
+    <!--   <!-- <v-col :md="6"> -->
 
-  <v-window v-model="activeTab">
-    <v-window-item :value="list.id" v-for="list in lists" :key="list.id">
-      <v-container fluid no-gutters class="mb-4">
+    <!--   <!-- TODO support search using list="banned" or group="something" + using regexp -->
+    <!--   <v-text-field -->
+    <!--     v-model="search" -->
+    <!--     label="Search URL, group, or type" -->
+    <!--     density="compact" -->
+    <!--     menu-icon="" -->
+    <!--     variant="outlined" -->
+    <!--     border="sm" -->
+    <!--     prepend-inner-icon="mdi-magnify" -->
+    <!--     auto-select-first -->
+    <!--     item-props -->
+    <!--   ></v-text-field> -->
+    <!--   <!-- </v-col> -->
+    <!--   <!-- <v-spacer /> -->
+
+    <!--   <v-btn -->
+    <!--     class="px-2 mx-2" -->
+    <!--     prepend-icon="mdi-plus" -->
+    <!--     height="42" -->
+    <!--     variant="text" -->
+    <!--     text="Add a URL" -->
+    <!--     border="sm" -->
+    <!--     @click="add" -->
+    <!--   ></v-btn> -->
+    <!--   <v-btn -->
+    <!--     class="px-2 mx-2" -->
+    <!--     prepend-icon="mdi-tune" -->
+    <!--     height="42" -->
+    <!--     variant="text" -->
+    <!--     text="Manage categories" -->
+    <!--     border -->
+    <!--     @click="toggleCategoriesManagerDialog" -->
+    <!--   ></v-btn> -->
+    <!-- </v-row> -->
+    <v-row no-gutters>
+      <!--   <v-col :md="4" > -->
+      <!--     <v-btn -->
+      <!--       :ripple="false" -->
+      <!--       :key="index" -->
+      <!--       :value="list.name" -->
+      <!--        -->
+      <!--       :prepend-icon="list.icon" -->
+      <!--       rounded="lg" -->
+      <!--       width="100%" -->
+      <!--       grow -->
+      <!--       :style="`border-left: 4px solid ${list.color}; color: ${list.color}`" -->
+      <!--     > -->
+      <!--       {{ list.name }} -->
+      <!--     </v-btn> -->
+      <!--   </v-col> -->
+    </v-row>
+    <!-- </v-container> -->
+
+    <v-window v-model="activeTab">
+      <v-window-item :value="list.id" v-for="list in lists" :key="list.id">
         <!-- TODO use v-list  -->
         <!-- <v-col :md="3"> -->
         <!--   <v-container> -->
@@ -88,34 +93,120 @@
         <!-- <v-container> -->
 
         <!-- :hide-default-footer="urls.length < 11" -->
-        <v-data-table
-          density="compact"
-          items-per-page="20"
-          :headers="headers"
-          :search="search"
-          :items="[].concat(...Array(30).fill(urls)).flat()"
-        >
-          <!-- <template v-slot:item.isregex="{ item }"> -->
-          <!--   <v-checkbox v-model="item.isregex" disabled class="text-center" /> -->
-          <!-- </template> -->
-          <!-- style="max-width: 250px" -->
-          <template v-slot:item.group="{ value }">
-            <v-chip
-              :color="getGroupColor(value)"
-              :text="value"
-              size="x-medium"
-            ></v-chip>
-          </template>
-          <template v-slot:item.url="{ item }">
-            <v-row>
-              <v-icon-btn
-                icon="mdi-pencil"
-                size="24"
-                variant="plain"
-                @click="edit(item.id)"
+        <v-card>
+          <v-toolbar class="px-4" height="50">
+            <div class="me-2">
+              <v-tooltip
+                max-width="250"
+                text="Transparently redirect a URL (could be a regexp) to another one, transparently (i.e. the user would not know about it.)."
+                location="bottom"
               >
-                <v-icon size="16"></v-icon>
-              </v-icon-btn>
+                <template v-slot:activator="{ props }">
+                  <v-icon v-bind="props" color="grey"
+                    >mdi-help-circle-outline</v-icon
+                  >
+                </template>
+              </v-tooltip>
+            </div>
+            <div style="font-size: 18px" class="font-weight-bold">
+              Black URL List
+            </div>
+            <v-spacer />
+
+            <v-text-field
+              v-model="search"
+              class="mt-6"
+              max-width="400"
+              label="Search URL"
+              menu-icon=""
+              density="compact"
+              variant="outlined"
+              prepend-inner-icon="mdi-magnify"
+              auto-select-first
+              item-props
+              border
+            ></v-text-field>
+            <v-btn variant="flat" class="ml-3 mt-1"> Search </v-btn>
+            <v-btn
+              class="px-2 mx-2"
+              prepend-icon="mdi-plus"
+              height="42"
+              variant="text"
+              text="Add a URL"
+              border="sm"
+              @click="add"
+            ></v-btn>
+            <!-- <v-btn -->
+            <!--   class="px-2 mx-2" -->
+            <!--   prepend-icon="mdi-tune" -->
+            <!--   height="42" -->
+            <!--   variant="text" -->
+            <!--   text="Manage categories" -->
+            <!--   border -->
+            <!--   @click="toggleCategoriesManagerDialog" -->
+            <!-- ></v-btn> -->
+          </v-toolbar>
+          <v-data-table
+            density="compact"
+            items-per-page="20"
+            hover
+            item-selectable
+            :headers="headers"
+            :search="search"
+            :items="[].concat(...Array(30).fill(urls)).flat()"
+          >
+            <template v-slot:item.category="{ value }">
+              <div>
+                <!-- :style="`background-color: ${getCategoryColor(value)}`" -->
+                <v-icon
+                  icon="mdi-circle"
+                  :color="getCategoryColor(value)"
+                  class="me-1"
+                />
+                {{ value }}
+              </div>
+              <!-- <v-chip -->
+              <!--   :color="getCategoryColor(value)" -->
+              <!--   :text="value" -->
+              <!--   size="x-medium" -->
+              <!-- ></v-chip> -->
+            </template>
+            <template v-slot:item.isregex="{ item }">
+              <div class="text-green-darken-2" v-if="item.isregex">
+                <v-icon icon="mdi-check-bold" />
+              </div>
+              <div class="text-red-darken-2" v-else>
+                <v-icon icon="mdi-close" />
+              </div>
+            </template>
+
+            <!-- style="max-width: 250px" -->
+            <!-- <template v-slot:item.group="{ value }"> -->
+            <!--   <div -->
+            <!--     class="d-flex text-black font-weight-bold align-center text-center pa-0 w-100 h-100 ma-0" -->
+            <!--     :style="`background-color: ${getGroupColor(value)}`" -->
+            <!--   > -->
+            <!--     <v-icon icon="mdi-circle" :color="getCategoryColor(value)" /> -->
+            <!--     {{ value }} -->
+            <!--   </div> -->
+            <!-- </template> -->
+            <!-- <template v-slot:item.group="{ value }"> -->
+            <!--   <v-chip -->
+            <!--     :color="getGroupColor(value)" -->
+            <!--     :text="value" -->
+            <!--     size="x-medium" -->
+            <!--   ></v-chip> -->
+            <!-- </template> -->
+            <template v-slot:item.url="{ item }">
+              <!--   <v-row> -->
+              <!-- <v-icon-btn -->
+              <!--   icon="mdi-pencil" -->
+              <!--   size="24" -->
+              <!--   variant="plain" -->
+              <!--   @click="edit(item.id)" -->
+              <!-- > -->
+              <!--   <v-icon size="16"></v-icon> -->
+              <!-- </v-icon-btn> -->
 
               <!-- <v-icon-btn -->
               <!--   icon="mdi-delete-outline" -->
@@ -127,8 +218,8 @@
               <!-- </v-icon-btn> -->
               <v-chip
                 :text="item.url"
-                border="thin opacity-25"
                 size="x-medium"
+                prepend-icon="mdi-link"
                 label
               />
               <!-- @click="edit(item.id)" -->
@@ -145,44 +236,45 @@
               <!--   </v-icon> -->
               <!-- </template> -->
               <!-- </v-chip> -->
-            </v-row>
-          </template>
+              <!--   </v-row> -->
+            </template>
 
-          <!-- <template v-slot:item.actions="{ item }"> -->
-          <!--   <div class="d-flex ga-2 justify-end"> -->
-          <!--     <v-icon -->
-          <!--       color="medium-emphasis" -->
-          <!--       icon="mdi-pencil" -->
-          <!--       size="small" -->
-          <!--       @click="edit(item.id)" -->
-          <!--     ></v-icon> -->
+            <!-- <template v-slot:item.actions="{ item }"> -->
+            <!--   <div class="d-flex ga-2 justify-end"> -->
+            <!--     <v-icon -->
+            <!--       color="medium-emphasis" -->
+            <!--       icon="mdi-pencil" -->
+            <!--       size="small" -->
+            <!--       @click="edit(item.id)" -->
+            <!--     ></v-icon> -->
 
-          <!--     <v-icon -->
-          <!--       color="medium-emphasis" -->
-          <!--       icon="mdi-delete" -->
-          <!--       size="small" -->
-          <!--       @click="remove(item.id)" -->
-          <!--     ></v-icon> -->
-          <!--   </div> -->
-          <!-- </template> -->
+            <!--     <v-icon -->
+            <!--       color="medium-emphasis" -->
+            <!--       icon="mdi-delete" -->
+            <!--       size="small" -->
+            <!--       @click="remove(item.id)" -->
+            <!--     ></v-icon> -->
+            <!--   </div> -->
+            <!-- </template> -->
 
-          <template v-slot:no-data>
-            <v-btn
-              prepend-icon="mdi-backup-restore"
-              rounded="lg"
-              text="Reset data"
-              variant="text"
-              border
-              @click="reset"
-            ></v-btn>
-          </template>
-        </v-data-table>
+            <template v-slot:no-data>
+              <v-btn
+                prepend-icon="mdi-backup-restore"
+                rounded="lg"
+                text="Reset data"
+                variant="text"
+                border
+                @click="reset"
+              ></v-btn>
+            </template>
+          </v-data-table>
+        </v-card>
         <!-- </v-container> -->
         <!-- </v-container> -->
         <!-- </v-col> -->
-      </v-container>
-    </v-window-item>
-  </v-window>
+      </v-window-item>
+    </v-window>
+  </v-container>
 
   <!-- <v-col -->
   <!--   v-for="(list, index) in lists" -->
@@ -337,18 +429,18 @@
     <ManageCategoriesDialog />
   </v-dialog>
 
-  <v-dialog
-    v-model="appStore.colorPickerDialog"
-    width="auto"
-    height="auto"
-    opacity="0"
-    position="absolute"
-    location-strategy="connected"
-    scroll-strategy="reposition"
-    :style="{ backgroundColor: 'transparent' }"
-  >
-    <ColorPickerDialog />
-  </v-dialog>
+  <!-- <v-dialog -->
+  <!--   v-model="appStore.colorPickerDialog" -->
+  <!--   width="auto" -->
+  <!--   height="auto" -->
+  <!--   opacity="0" -->
+  <!--   position="absolute" -->
+  <!--   location-strategy="connected" -->
+  <!--   scroll-strategy="reposition" -->
+  <!--   :style="{ backgroundColor: 'transparent' }" -->
+  <!-- > -->
+  <!--   <ColorPickerDialog /> -->
+  <!-- </v-dialog> -->
 </template>
 <script setup lang="ts">
 import { onMounted, ref, shallowRef } from "vue";
@@ -413,10 +505,10 @@ function toggleCategoriesManagerDialog() {
 const isEditing = shallowRef(false);
 
 const headers = [
+  { title: "Category", key: "category", align: "left" },
+  { title: "Group", key: "group", align: "left" },
+  { title: "IsRegex", key: "isregex", align: "left" },
   { title: "URL", key: "url", align: "start" },
-  { title: "IsRegex", key: "isregex", align: "end" },
-  { title: "Category", key: "category", align: "end" },
-  { title: "Group", key: "group", align: "end" },
   // { title: "Actions", key: "actions", align: "end", sortable: false },
 ];
 
@@ -518,6 +610,13 @@ const lists = [
     userCategories: [],
   },
 ];
+
+function getCategoryColor(group: string): string {
+  if (group === "Gambling") return "purple";
+  else if (group === "Porn") return "red";
+  else if (group === "Weapons") return "brown";
+  return "white";
+}
 
 function getGroupColor(group: string): string {
   if (group === "group1") return "cyan";

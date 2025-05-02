@@ -1,5 +1,12 @@
 <template>
   <!-- <LoaderBox :loading="loading"> -->
+
+  <!-- <pie-chart -->
+  <!--   :data="[ -->
+  <!--     ['Blueberry', 44], -->
+  <!--     ['Strawberry', 23], -->
+  <!--   ]" -->
+  <!-- ></pie-chart> -->
   <div id="chart">
     <apexchart type="pie" :options="chartOptions" :series="series"></apexchart>
   </div>
@@ -30,7 +37,7 @@ watch(
 //   setTimeout(() => (loading.value = false), 1000);
 // });
 
-const series = ref([14, 23, 21, 17, 15, 10, 12, 17, 21]);
+const series = ref([32, 18, 10, 20, 10, 5, 5]);
 
 const chartOptions = ref({
   theme: {
@@ -39,19 +46,22 @@ const chartOptions = ref({
   },
   chart: {
     type: "pie",
+    animations: {
+      enabled: false,
+    },
   },
   stroke: {
     colors: ["#444444"],
   },
-  fill: {
-    opacity: 0.8,
-  },
-  plotOptions: {
-    pie: {
-      startAngle: -90,
-      endAngle: 270,
-    },
-  },
+  // fill: {
+  //   opacity: 0.8,
+  // },
+  // plotOptions: {
+  //   pie: {
+  //     startAngle: -90,
+  //     endAngle: 270,
+  //   },
+  // },
   // responsive: [
   //   {
   //     breakpoint: 480,

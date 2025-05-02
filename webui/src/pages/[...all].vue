@@ -8,7 +8,7 @@
   </v-empty-state>
 </template>
 
-<route>
-meta:
-  layout: 404
-</route>
+<!-- <route> -->
+<!-- meta: -->
+<!--   layout: 404 -->
+<!-- </route> -->

@@ -90,7 +90,7 @@
       </div>
       <v-spacer />
 
-      <div class="mr-2 text-">
+      <div class="mr-2 text-body-2">
         <v-btn
           :disabled="autoUpdate"
           :loading="isUpdating"

@@ -1,51 +1,4 @@
 <template>
-  <v-card class="mx-auto">
-    <div>
-      <!-- class="text-h4" -->
-      Naugtiness limit:
-      <!-- <span class="text-h5 font-weight-light" v-text="naughtiness"></span> -->
-      <!-- <v-spacer></v-spacer> -->
-    </div>
-    <v-slider
-      v-model="naughtiness"
-      thumb-label
-      :color="color"
-      :step="10"
-      max="300"
-      min="10"
-      track-color="grey"
-    >
-      <template v-slot:prepend>
-        <v-btn
-          :color="color"
-          icon="mdi-minus"
-          size="small"
-          variant="text"
-          @click="decrement"
-        ></v-btn>
-      </template>
-
-      <template v-slot:append>
-        <v-btn
-          :color="color"
-          icon="mdi-plus"
-          size="small"
-          variant="text"
-          @click="increment"
-        ></v-btn>
-      </template>
-    </v-slider>
-    <div class="text-center">
-      Presets:
-      <v-btn color="cyan" @click="setVal(60)">60: Best for children</v-btn>
-      <v-btn color="blue" @click="setVal(100)"
-        >100: Best for old children</v-btn
-      >
-      <v-btn color="blue-darken-4" @click="setVal(160)"
-        >160: Best for young adults</v-btn
-      >
-    </div>
-  </v-card>
   <!-- TODO this isn't complete, you have to define the record in script and you should add to save button the save function -->
   <v-dialog v-model="dialog" max-width="500">
     <v-card :title="`${isEditing ? 'Edit' : 'Add'} a Phrase`">
@@ -92,41 +45,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, shallowRef, computed, ref } from "vue";
-
-const slider1 = ref(50);
-
-const naughtiness = ref(60);
-const isPlaying = ref(false);
-
-const color = computed(() => {
-  if (naughtiness.value <= 60) return "cyan";
-  if (naughtiness.value <= 100) return "blue";
-  if (naughtiness.value <= 160) return "blue-darken-4";
-  return "red";
-});
+import { shallowRef } from "vue";
 
 const dialog = shallowRef(false);
 const isEditing = shallowRef(false);
-
-function add() {
-  isEditing.value = false;
-  dialog.value = true;
-}
-
-function decrement() {
-  naughtiness.value -= 10;
-}
-function increment() {
-  naughtiness.value += 10;
-}
-
-function setVal(val: number) {
-  naughtiness.value = val;
-}
 </script>
-
-<route lang="yaml">
-meta:
-  layout: proxy
-</route>

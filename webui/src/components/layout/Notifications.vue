@@ -3,9 +3,18 @@
   <div class="text-center">
     <v-menu v-model="menu" :close-on-content-click="false">
       <template v-slot:activator="{ props }">
-        <v-badge class="mr-3" v-bind="props" color="red-darken-4" content="9+">
-          <v-icon v-bind="on">mdi-bell</v-icon>
-        </v-badge>
+        <v-tooltip text="Notifications" max-width="300" location="bottom">
+          <template v-slot:activator="{ props }">
+            <v-badge
+              class="mr-3"
+              v-bind="props"
+              color="red-darken-4"
+              content="9+"
+            >
+              <v-icon v-bind="on">mdi-bell</v-icon>
+            </v-badge>
+          </template>
+        </v-tooltip>
       </template>
 
       <v-card max-width="400" class="overflow-y-auto" max-height="520">

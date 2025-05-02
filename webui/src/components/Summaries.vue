@@ -1,38 +1,36 @@
+<!-- TODO add dynamic numbers (See: https://www.7te.net/zp-ui/#/dynamicnumbers) -->
 <template>
   <v-container max-width="1400" class="d-flex justify-space-between px-10">
-    <v-card
-      link
-      class="text-center mr-2"
-      style="border-bottom: 6px solid #5c6bc0"
-    >
+    <v-card class="text-center mr-2" style="border-bottom: 6px solid #5c6bc0">
       <v-card-item class="d-flex">
-        <div class="text-no-wrap"># Of Successful Requests</div>
+        <div class="d-flex justify-space-between">
+          <div class="text-no-wrap"># Successful Requests</div>
+          <v-icon color="grey" class="me-3 cursor-grab" icon="mdi-drag" />
+        </div>
         <div class="d-flex">
           <span class="text-h3 my-1">10,230</span>
           <span>req</span>
         </div>
       </v-card-item>
     </v-card>
-    <v-card
-      link
-      class="text-center mr-2"
-      style="border-bottom: 6px solid #5c6bc0"
-    >
+    <v-card class="text-center mr-2" style="border-bottom: 6px solid #5c6bc0">
       <v-card-item>
-        <div class="text-no-wrap"># Of Requests Banned</div>
+        <div class="d-flex justify-space-between">
+          <div class="text-no-wrap"># Of Requests Banned</div>
+          <v-icon color="grey" class="me-3 cursor-grab" icon="mdi-drag" />
+        </div>
         <div class="d-flex">
           <span class="text-h3 my-1">3,120</span>
           <span>req</span>
         </div>
       </v-card-item>
     </v-card>
-    <v-card
-      link
-      class="text-center mr-2"
-      style="border-bottom: 6px solid #5c6bc0"
-    >
+    <v-card class="text-center mr-2" style="border-bottom: 6px solid #5c6bc0">
       <v-card-item>
-        <div class="text-no-wrap">Weekly Activity</div>
+        <div class="d-flex justify-space-between">
+          <div class="text-no-wrap">Weekly Activity</div>
+          <v-icon color="grey" class="me-3 cursor-grab" icon="mdi-drag" />
+        </div>
         <div class="d-flex">
           <span class="text-h3 my-1">75</span>
           <span>%</span>
@@ -45,13 +43,12 @@
         </div>
       </v-card-item>
     </v-card>
-    <v-card
-      link
-      class="text-center mr-2"
-      style="border-bottom: 6px solid #5c6bc0"
-    >
+    <v-card class="text-center mr-2" style="border-bottom: 6px solid #5c6bc0">
       <v-card-item>
-        <div class="text-no-wrap">Today's Activity</div>
+        <div class="d-flex justify-space-between">
+          <div class="text-no-wrap">Today's Activity</div>
+          <v-icon color="grey" class="me-3 cursor-grab" icon="mdi-drag" />
+        </div>
         <div class="d-flex">
           <span class="text-h3 my-1">23</span>
           <span>%</span>
@@ -64,13 +61,12 @@
         </div>
       </v-card-item>
     </v-card>
-    <v-card
-      link
-      class="text-center mr-2"
-      style="border-bottom: 6px solid #5c6bc0"
-    >
+    <v-card class="text-center mr-2" style="border-bottom: 6px solid #5c6bc0">
       <v-card-item>
-        <div class="text-no-wrap">Projects</div>
+        <div class="d-flex justify-space-between">
+          <div class="text-no-wrap">Projects</div>
+          <v-icon color="grey" class="me-3 cursor-grab" icon="mdi-drag" />
+        </div>
         <div class="d-flex">
           <span class="text-h3 my-1">2</span>
           <span class="d-flex align-center ga-2 text-red-darken-4">
@@ -82,13 +78,12 @@
         </div>
       </v-card-item>
     </v-card>
-    <v-card
-      link
-      class="text-center mr-2"
-      style="border-bottom: 6px solid #5c6bc0"
-    >
+    <v-card class="text-center mr-2" style="border-bottom: 6px solid #5c6bc0">
       <v-card-item>
-        <div class="text-no-wrap">Productive Time</div>
+        <div class="d-flex justify-space-between">
+          <div class="text-no-wrap">Productive Time</div>
+          <v-icon color="grey" class="me-3 cursor-grab" icon="mdi-drag" />
+        </div>
         <div class="d-flex">
           <span class="text-h3 my-1"> 131:142:11 </span>
           <span>hours</span>

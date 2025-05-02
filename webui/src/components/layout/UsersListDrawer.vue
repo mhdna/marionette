@@ -2,16 +2,28 @@
   <v-navigation-drawer
     location="right"
     class="position-fixed overflow-y-auto"
+    :rail="isRail"
     :model-value="props.showDrawer"
     @update:model-value="emit('update:showDrawer', $event)"
+    :temporary="isDock"
   >
     <!-- temporary -->
     <template v-slot:prepend>
-      <v-toolbar height="35">
-        <v-btn icon="mdi-unfold-less-vertical" min-width="30" />
-        <v-btn icon="mdi-dock-window" min-width="30" />
-        <v-spacer />
-      </v-toolbar>
+      <!-- <v-toolbar height="35"> -->
+      <!--   <v-btn -->
+      <!--     v-tooltip:bottom="'Minimize menu'" -->
+      <!--     icon="mdi-unfold-less-vertical" -->
+      <!--     @click="toggleRail" -->
+      <!--     min-width="30" -->
+      <!--   /> -->
+      <!--   <v-btn -->
+      <!--     v-tooltip:bottom="'Undock menu'" -->
+      <!--     icon="mdi-dock-window" -->
+      <!--     @click="toggleDock" -->
+      <!--     min-width="30" -->
+      <!--   /> -->
+      <!--   <v-spacer /> -->
+      <!-- </v-toolbar> -->
       <!-- <v-toolbar extended> -->
       <!--   <v-toolbar-title text="Users List"></v-toolbar-title> -->
       <!--   <template v-slot:prepend> -->
@@ -164,4 +176,16 @@ const users = [
   },
   // { type: "divider", inset: true },
 ];
+
+const isRail = ref(false);
+
+const toggleRail = () => {
+  isRail.value = !isRail.value;
+};
+
+const isDock = ref(false);
+
+const toggleDock = () => {
+  isDock.value = !isDock.value;
+};
 </script>

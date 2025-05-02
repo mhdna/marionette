@@ -2,7 +2,7 @@ const english = {
   not_found: "Not found",
   search: "Jump to (C-k)",
   overview: "Dashboard",
-  proxy_config: "Proxy Configuration",
+  proxy_config: "Proxy Config",
   users: "Users and Groups",
   screenshots: "Screenshots",
   apps: "App usage",

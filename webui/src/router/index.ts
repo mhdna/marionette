@@ -46,6 +46,8 @@ const router = createRouter({
 
 // // 5. Run NProgress every time you navigate
 // router.beforeEach((to, from, next) => {
+//   // NProgress.configure({ parent: "#navbar-wrapper" });
+
 //   NProgress.start();
 //   NProgress.set(0.1);
 //   next();

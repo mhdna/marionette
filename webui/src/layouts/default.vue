@@ -29,7 +29,7 @@ function toggleUsersDrawer() {
 
 const { mobile } = useDisplay();
 
-const isRail = ref(false);
+// const isRail = ref(false);
 const showNavigationDrawer = ref(!mobile.value); // required for initial state to depend on mobile or not
 
 const toggleNavigationDrawer = () => {
@@ -93,7 +93,7 @@ const tabs: Tab[] = [
   { text: "App Usage", to: "/dashboard/app_usage" },
   { text: "Screenshots", to: "/dashboard/screenshots" },
   { text: "Key Loggers", to: "/dashboard/keyloggers" },
-  { text: "URL Lists", to: "/proxy" },
+  { text: "URL Lists", to: "/proxy/urls" },
   { text: "Phrase Lists", to: "/proxy/phrases" },
   { text: "Redirects", to: "/proxy/redirects" },
 ];
@@ -104,6 +104,7 @@ const tabs: Tab[] = [
   <v-theme-provider>
     <!-- <v-responsive class="border rounded"> -->
     <v-app>
+      <div id="navbar-wrapper" style="position: relative"></div>
       <!-- <v-fab -->
       <!--   key="app" -->
       <!--   absolute -->
@@ -117,6 +118,15 @@ const tabs: Tab[] = [
         :showDrawer="showNavigationDrawer"
         @update:showDrawer="showNavigationDrawer = $event"
       />
+      <!-- <NavDrawer -->
+      <!--   :showDrawer="showNavigationDrawer" -->
+      <!--   @update:showDrawer="showNavigationDrawer = $event" -->
+      <!-- /> -->
+      <AppBar
+        @toggleNavigationDrawer="toggleNavigationDrawer"
+        @toggleUsersDrawer="toggleUsersDrawer"
+        :tabs="tabs"
+      />
       <UsersListDrawer
         :showDrawer="showUsersDrawer"
         @update:showDrawer="showUsersDrawer = $event"
@@ -126,14 +136,9 @@ const tabs: Tab[] = [
       <!--   @toggleUsersDrawer="toggleUsersDrawer" -->
       <!--   title="marionette" -->
       <!-- /> -->
-      <AppBar
-        @toggleNavigationDrawer="toggleNavigationDrawer"
-        @toggleUsersDrawer="toggleUsersDrawer"
-        :tabs="tabs"
-      />
       <!-- class="d-flex align-center justify-center" -->
       <!-- <v-main style="min-height: 300px"> -->
-      <v-main>
+      <v-main class="mb-4">
         <!-- <SetupGuide /> -->
         <!-- <LoadingOverlay :loading="loading" /> -->
         <!-- <h1>Dashboard</h1> -->
@@ -181,6 +186,26 @@ const tabs: Tab[] = [
   </v-theme-provider>
 </template>
 
+<style>
+/* Must be global, NOT scoped */
+#nprogress .bar {
+  background: #5c6bc0 !important; /* color */
+  height: 5px !important; /* height */
+}
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  position: absolute !important; /* not fixed */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #ff5722;
+  z-index: 9999;
+}
+</style>
 <!-- <style> -->
 <!-- #navi .v-speed-dial { -->
 <!--   position: absolute; -->

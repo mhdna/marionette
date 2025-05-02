@@ -1,30 +1,48 @@
 <template>
-  <v-card
-    flat
-    prepend-icon="mdi-magnify"
-    title="Force Safe search"
-    class="py-2 px-8"
-  >
-    <v-row>
-      <v-card rounded class="mx-auto">
-        <v-card-text>
-          <v-icon icon="mdi-information" />
+  <v-card>
+    <div class="d-flex">
+      <!-- <div class="me-2"> -->
+      <!-- </div> -->
+      <v-toolbar class="px-4" height="50">
+        <div class="text-center d-flex justify-center">
+          <div class="me-2">
+            <v-tooltip
+              max-width="200"
+              text="Force search engines to be redirected to safe."
+              location="bottom"
+            >
+              <template v-slot:activator="{ props }">
+                <v-icon v-bind="props" color="grey"
+                  >mdi-help-circle-outline</v-icon
+                >
+              </template>
+            </v-tooltip>
+          </div>
+          <div style="font-size: 18px" class="font-weight-bold">
+            Safe Search
+          </div>
+        </div>
+      </v-toolbar>
+    </div>
 
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod.</v-card-text
-        >
-      </v-card>
-    </v-row>
-    <v-row
-      v-for="(app, index) in apps"
-      :key="index"
-      density="compact"
-      class="align-center pa-0 ma-0"
-    >
+    <!-- <v-row> -->
+    <!--   <v-card rounded class="mx-auto"> -->
+    <!--     <v-card-text> -->
+    <!--       <v-icon icon="mdi-information" /> -->
+
+    <!--       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do -->
+    <!--       eiusmod. -->
+    <!--     </v-card-text> -->
+    <!--   </v-card> -->
+    <!-- </v-row> -->
+    <div v-for="(app, index) in apps" :key="index">
       <v-switch
         base-color="red"
         color="green"
+        density="compact"
         true-icon="mdi-check-bold"
+        class="mx-2"
+        hide-details
         false-icon="mdi-close"
         :model-value="true"
         :label="app.name"
@@ -33,7 +51,7 @@
       <!-- <v-spacer /> -->
       <!-- <v-img :src="app.icon" :max-width="50" /> -->
       <!-- <v-row> -->
-    </v-row>
+    </div>
   </v-card>
   <!-- <v-card -->
   <!--   v-for="(app, index) in apps" -->

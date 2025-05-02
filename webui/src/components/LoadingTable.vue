@@ -159,7 +159,7 @@ const { t } = useI18n();
 
 const search = ref("");
 
-const itemsPerPage = 20;
+const itemsPerPage = 15;
 const headers = computed(() => [
   {
     title: "User",
