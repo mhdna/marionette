@@ -143,7 +143,7 @@ defineProps<{
 
 .image-div {
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   width: 40%;
   height: 100%;
   transition: all 0.4s ease-in-out;
