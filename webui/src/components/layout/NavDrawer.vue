@@ -3,7 +3,6 @@
   <!--  permanent makes your bar always apparent even after resize -->
   <!-- :image="bg" -->
   <v-navigation-drawer
-    width="240"
     absolute
     app
     :rail="props.isRail"
@@ -11,6 +10,7 @@
     @update:model-value="emit('update:showDrawer', $event)"
     class="position-fixed"
   >
+    <!-- width="240" -->
     <!-- :temporary="isDock" -->
     <!-- :model-value="isDock || props.showDrawer" -->
     <!-- TODO v-model="!mobile && drawer" -->
@@ -18,35 +18,46 @@
     <!-- prepend-avatar="/profile.jpg" -->
     <!-- <v-list-item subtitle="mahdi@mail.com" title="Papa Mahdi"> -->
     <template v-slot:prepend>
-      <v-list>
+      <!-- <div class="pa-0"> -->
+      <!-- <AppTitle /> -->
+      <!-- <AppTitleWithDot2 /> -->
+      <div v-if="!isRail">
         <v-list-item>
           <template v-slot:prepend>
             <v-avatar size="40" class="avatar-align">
+              <!-- <v-img src="https://cdn.vuetifyjs.com/images/lists/4.jpg" /> -->
               <v-img src="/profile.jpg" />
             </v-avatar>
           </template>
           <template v-slot:append>
             <div>
-              <v-list-item-title>Mahdi Nayef</v-list-item-title>
+              <v-list-item-title>Papa Mahdi</v-list-item-title>
+              <!-- <v-list-item-title>Rashel Gabriel</v-list-item-title> -->
               <!-- FIXME if so long it'll push the arrow to the right -->
               <v-list-item-subtitle>mahdi@gmail.com</v-list-item-subtitle>
             </div>
             <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn>
           </template>
         </v-list-item>
-      </v-list>
+        <StatsCard />
+      </div>
+      <!-- <Dot v-else /> -->
+      <!-- </div> -->
       <!-- <v-avatar size="50px"> -->
       <!--   <v-img src="/profile.jpg"></v-img> -->
       <!-- </v-avatar> -->
       <!-- <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn> -->
       <!-- <StatusCard /> -->
     </template>
+    <!-- <v-divider thickness="2" /> -->
+    <!-- <div style="height: 1px; background-color: grey; border-radius: 80px"></div> -->
     <!-- </v-list-item> -->
     <!-- <Reload /> -->
     <!-- <v-divider></v-divider> -->
 
     <!-- nav -->
     <v-list density="compact" v-model:opened="open">
+      <!-- class="mt-0 pt-0" -->
       <!-- <v-list-item class="text-center"> -->
       <!-- <SearchInput v-show="!smAndDown" /> -->
       <!-- <SearchInput /> -->
@@ -136,7 +147,45 @@ const items = computed<MenuItem[]>(() => [
     value: "overview",
     // icon: "mdi-monitor-dashboard",
     icon: "mdi-view-dashboard",
-    to: "/dashboard",
+    to: "/dashboard/",
+    subItems: [
+      {
+        text: "Overview",
+        value: "overview",
+        icon: "mdi-square",
+        to: "/dashboard/overview",
+      },
+      {
+        text: "Time Tables",
+        value: "time_tables",
+        icon: "mdi-clock",
+        to: "/dashboard/time_tables",
+      },
+      {
+        text: "Internet Usage",
+        value: "internet_usage",
+        icon: "mdi-link",
+        to: "/dashboard/internet_usage",
+      },
+      // {
+      //   text: "App Usage",
+      //   value: "app_usage",
+      //   icon: "mdi-application",
+      //   to: "/dashboard/app_usage",
+      // },
+      {
+        text: "Screenshots",
+        value: "screenshots",
+        icon: "mdi-image",
+        to: "/dashboard/screenshots",
+      },
+      {
+        text: "Key Loggers",
+        value: "keyloggers",
+        icon: "mdi-keyboard",
+        to: "/dashboard/keyloggers",
+      },
+    ],
   },
   {
     text: t("proxy_config"),
@@ -162,12 +211,12 @@ const items = computed<MenuItem[]>(() => [
         icon: "mdi-arrow-down-right",
         to: "/proxy/redirects",
       },
-      {
-        text: "Categories",
-        value: "categories",
-        icon: "mdi-shape",
-        to: "/proxy/categories",
-      },
+      // {
+      //   text: "Categories",
+      //   value: "categories",
+      //   icon: "mdi-shape",
+      //   to: "/proxy/categories",
+      // },
       // {
       //   text: "Safe Search",
       //   value: "safesearch",
@@ -183,10 +232,10 @@ const items = computed<MenuItem[]>(() => [
     ],
   },
   {
-    text: "App Limits",
-    value: "applimits",
+    text: "App Settings",
+    value: "apps",
     icon: "mdi-application",
-    to: "/applimits",
+    to: "/apps",
   },
   // {
   //   text: t("apps"),
@@ -224,12 +273,12 @@ const items = computed<MenuItem[]>(() => [
   //   icon: "mdi-image",
   //   to: "/screenshots",
   // },
-  {
-    text: "Livestream",
-    value: "live_stream",
-    icon: "mdi-video",
-    to: "/livestream",
-  },
+  // {
+  //   text: "Livestream",
+  //   value: "live_stream",
+  //   icon: "mdi-video",
+  //   to: "/livestream",
+  // },
   {
     text: t("users"),
     value: "users",
