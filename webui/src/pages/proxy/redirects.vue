@@ -1,124 +1,162 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col :md="10">
-        <v-card>
-          <div class="d-flex">
-            <v-toolbar class="px-4" height="50">
-              <div class="me-2">
-                <v-tooltip
-                  max-width="250"
-                  text="Transparently redirect a URL (could be a regexp) to another one, transparently (i.e. the user would not know about it.)."
-                  location="bottom"
+  <v-container fluid class="d-flex flex-column">
+    <!-- <v-row> -->
+    <!-- <v-col :md="10"> -->
+    <div class="d-flex mb-4 justify-space-between">
+      <!-- <AddRedirectCard class="me-2 flex-grow-1" /> -->
+      <ActionCard title="Add A Redirect" icon="mdi-plus" class="me-2" />
+      <ActionCard
+        title="Manage Redirects Categories"
+        icon="mdi-tune"
+        class="me-2"
+      />
+      <ActionCard title="Enforce Safe Search" icon="mdi-security" />
+    </div>
+    <!-- <v-card class="mb-4"> -->
+    <!--   <SafeSearchCard /> -->
+    <!-- </v-card> -->
+    <v-card>
+      <div class="d-flex">
+        <v-toolbar density="compact" class="px-4">
+          <div class="me-2">
+            <v-tooltip
+              max-width="250"
+              text="Transparently redirect a URL (could be a regexp) to another one, transparently (i.e. the user would not know about it.)."
+              location="bottom"
+            >
+              <template v-slot:activator="{ props }">
+                <v-icon v-bind="props" color="grey"
+                  >mdi-help-circle-outline</v-icon
                 >
-                  <template v-slot:activator="{ props }">
-                    <v-icon v-bind="props" color="grey"
-                      >mdi-help-circle-outline</v-icon
-                    >
-                  </template>
-                </v-tooltip>
-              </div>
-              <div style="font-size: 18px" class="font-weight-bold">
-                Redirects Table
-              </div>
-              <v-spacer />
-              <v-text-field
-                v-model="search"
-                class="mt-6"
-                max-width="400"
-                label="Search URL"
-                menu-icon=""
-                density="compact"
-                variant="outlined"
-                prepend-inner-icon="mdi-magnify"
-                auto-select-first
-                item-props
-                border
-              ></v-text-field>
-              <v-btn variant="flat" class="ml-3 mt-1"> Search </v-btn>
-            </v-toolbar>
+              </template>
+            </v-tooltip>
           </div>
-          <v-data-table
+          <div style="font-size: 18px" class="font-weight-bold">
+            Redirects Table
+          </div>
+          <v-spacer />
+          <v-text-field
+            v-model="search"
+            class="mt-5 me-2"
+            max-width="400"
+            placeholder="Search Redirect"
+            menu-icon=""
             density="compact"
-            items-per-page="20"
-            hover
-            item-selectable
-            :headers="headers"
-            :search="search"
-            :items="urls"
-          >
-            <template v-slot:item.from="{ item }">
-              <v-row>
-                <v-chip
-                  class="overflow-y-auto"
-                  :text="item.from"
-                  size="x-medium"
-                  label
-                />
-                <!-- @click="edit(item.id)" -->
-                <!-- @mouseover="hoverUrl = item.id" -->
-                <!-- @mouseleave="hoverUrl = null" -->
-                <!-- <template v-slot:prepend> -->
-                <!--   <v-icon -->
-                <!--     class="mr-1" -->
-                <!--     :color=" -->
-                <!--       hoverUrl === item.id ? 'primary' : 'medium-emphasis' -->
-                <!--     " -->
-                <!--   > -->
-                <!--     {{ hoverUrl === item.id ? "mdi-pencil" : "mdi-link" }} -->
-                <!--   </v-icon> -->
-                <!-- </template> -->
-                <!-- </v-chip> -->
-              </v-row>
-            </template>
-            <template v-slot:item.to="{ item }">
-              <v-row>
-                <v-chip
-                  class="overflow-y-auto"
-                  :text="item.to"
-                  size="x-medium"
-                  label
-                />
-                <!-- @click="edit(item.id)" -->
-                <!-- @mouseover="hoverUrl = item.id" -->
-                <!-- @mouseleave="hoverUrl = null" -->
-                <!-- <template v-slot:prepend> -->
-                <!--   <v-icon -->
-                <!--     class="mr-1" -->
-                <!--     :color=" -->
-                <!--       hoverUrl === item.id ? 'primary' : 'medium-emphasis' -->
-                <!--     " -->
-                <!--   > -->
-                <!--     {{ hoverUrl === item.id ? "mdi-pencil" : "mdi-link" }} -->
-                <!--   </v-icon> -->
-                <!-- </template> -->
-                <!-- </v-chip> -->
-              </v-row>
-            </template>
-          </v-data-table>
-        </v-card>
-        <!-- </v-container> -->
+            variant="outlined"
+            prepend-inner-icon="mdi-magnify"
+            auto-select-first
+            item-props
+            border
+          ></v-text-field>
+          <!-- <v-btn variant="flat" class="ml-3 mt-1"> Search </v-btn> -->
+          <!-- <v-btn -->
+          <!--   class="px-2 me-2" -->
+          <!--   prepend-icon="mdi-plus" -->
+          <!--   variant="text" -->
+          <!--   text="Add a Redirect" -->
+          <!--   border="sm" -->
+          <!--   @click="add" -->
+          <!-- ></v-btn> -->
+          <!-- <v-btn -->
+          <!--   class="px-2 me-2" -->
+          <!--   prepend-icon="mdi-tune" -->
+          <!--   variant="text" -->
+          <!--   text="Manage categories" -->
+          <!--   border -->
+          <!--   @click="toggleCategoriesManagerDialog" -->
+          <!-- ></v-btn> -->
+          <!-- <SafeSearchMenu> -->
+          <!--   <v-btn -->
+          <!--     class="px-2" -->
+          <!--     prepend-icon="mdi-magnify" -->
+          <!--     variant="text" -->
+          <!--     text="Safe Search" -->
+          <!--     border -->
+          <!--   ></v-btn> -->
+          <!-- </SafeSearchMenu> -->
+        </v-toolbar>
+      </div>
+      <v-data-table
+        density="compact"
+        items-per-page="20"
+        hover
+        item-selectable
+        :headers="headers"
+        :search="search"
+        :items="urls"
+      >
+        <template v-slot:item.from="{ item }">
+          <v-row>
+            <v-chip
+              class="overflow-y-auto"
+              :text="item.from"
+              size="x-medium"
+              label
+            />
+            <!-- @click="edit(item.id)" -->
+            <!-- @mouseover="hoverUrl = item.id" -->
+            <!-- @mouseleave="hoverUrl = null" -->
+            <!-- <template v-slot:prepend> -->
+            <!--   <v-icon -->
+            <!--     class="mr-1" -->
+            <!--     :color=" -->
+            <!--       hoverUrl === item.id ? 'primary' : 'medium-emphasis' -->
+            <!--     " -->
+            <!--   > -->
+            <!--     {{ hoverUrl === item.id ? "mdi-pencil" : "mdi-link" }} -->
+            <!--   </v-icon> -->
+            <!-- </template> -->
+            <!-- </v-chip> -->
+          </v-row>
+        </template>
+        <template v-slot:item.to="{ item }">
+          <v-row>
+            <v-chip
+              class="overflow-y-auto"
+              :text="item.to"
+              size="x-medium"
+              label
+            />
+            <!-- @click="edit(item.id)" -->
+            <!-- @mouseover="hoverUrl = item.id" -->
+            <!-- @mouseleave="hoverUrl = null" -->
+            <!-- <template v-slot:prepend> -->
+            <!--   <v-icon -->
+            <!--     class="mr-1" -->
+            <!--     :color=" -->
+            <!--       hoverUrl === item.id ? 'primary' : 'medium-emphasis' -->
+            <!--     " -->
+            <!--   > -->
+            <!--     {{ hoverUrl === item.id ? "mdi-pencil" : "mdi-link" }} -->
+            <!--   </v-icon> -->
+            <!-- </template> -->
+            <!-- </v-chip> -->
+          </v-row>
+        </template>
+      </v-data-table>
+    </v-card>
+    <!-- </v-container> -->
 
-        <!-- <v-row v-for="url in urls" mx="auto" justify="left"> -->
-        <!--   <v-chip max-width="200" class="overflow-y-auto">{{ -->
-        <!--     url.from -->
-        <!--   }}</v-chip> -->
-        <!--   <v-btn -->
-        <!--     border -->
-        <!--     icon="mdi-arrow-right" -->
-        <!--     size="small" -->
-        <!--     variant="text" -->
-        <!--   ></v-btn> -->
-        <!--   <v-chip max-width="200" class="overflow-y-auto">{{ url.to }}</v-chip> -->
-        <!-- </v-row> -->
-      </v-col>
-      <!-- <v-divider thickness="14" vertical /> -->
-      <v-col :md="2" :sm="12">
-        <div class="position-fixed d-flex align-center w-100">
-          <SafeSearchCard />
-        </div>
-      </v-col>
-    </v-row>
+    <!-- <v-row v-for="url in urls" mx="auto" justify="left"> -->
+    <!--   <v-chip max-width="200" class="overflow-y-auto">{{ -->
+    <!--     url.from -->
+    <!--   }}</v-chip> -->
+    <!--   <v-btn -->
+    <!--     border -->
+    <!--     icon="mdi-arrow-right" -->
+    <!--     size="small" -->
+    <!--     variant="text" -->
+    <!--   ></v-btn> -->
+    <!--   <v-chip max-width="200" class="overflow-y-auto">{{ url.to }}</v-chip> -->
+    <!-- </v-row> -->
+    <!-- </v-col> -->
+    <!-- <v-divider thickness="14" vertical /> -->
+    <!-- <v-col :md="2" :sm="12"> -->
+    <!-- <div class="position-fixed flex-1-100 right-0"> -->
+    <!-- <SafeSearchCard /> -->
+    <!-- </div> -->
+    <!-- </v-col> -->
+    <!-- </v-row> -->
   </v-container>
 </template>
 

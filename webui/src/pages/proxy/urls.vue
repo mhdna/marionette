@@ -5,15 +5,21 @@
 <template>
   <!-- <v-container> -->
   <!-- <v-row no-gutters> -->
-  <!--   <v-tabs fixed-tabs> -->
-  <!--     <v-tab -->
-  <!--       v-for="(list, index) in lists" -->
-  <!--       :text="list.name" -->
-  <!--       @click.prevent="activeTab = list.id" -->
-  <!--     ></v-tab> -->
-  <!--   </v-tabs> -->
+  <!-- <v-tabs fixed-tabs> -->
+  <!--   <v-tab -->
+  <!--     v-for="(list, index) in lists" -->
+  <!--     :text="list.name" -->
+  <!--     @click.prevent="activeTab = list.id" -->
+  <!--   ></v-tab> -->
+  <!-- </v-tabs> -->
   <!-- </v-row> -->
   <v-container fluid>
+    <!-- <AddURLCard /> -->
+    <div class="d-flex mb-4 justify-space-between">
+      <!-- <AddRedirectCard class="me-2 flex-grow-1" /> -->
+      <ActionCard title="Add A URL" icon="mdi-plus" class="me-2" />
+      <ActionCard title="Manage URL Categories" icon="mdi-tune" />
+    </div>
     <!-- :style="`background-color: ${list.color}; color: black`" -->
     <!-- <v-row class="mx-3"> -->
     <!--   <!-- <v-col :md="6"> -->
@@ -52,23 +58,23 @@
     <!--     @click="toggleCategoriesManagerDialog" -->
     <!--   ></v-btn> -->
     <!-- </v-row> -->
-    <v-row no-gutters>
-      <!--   <v-col :md="4" > -->
-      <!--     <v-btn -->
-      <!--       :ripple="false" -->
-      <!--       :key="index" -->
-      <!--       :value="list.name" -->
-      <!--        -->
-      <!--       :prepend-icon="list.icon" -->
-      <!--       rounded="lg" -->
-      <!--       width="100%" -->
-      <!--       grow -->
-      <!--       :style="`border-left: 4px solid ${list.color}; color: ${list.color}`" -->
-      <!--     > -->
-      <!--       {{ list.name }} -->
-      <!--     </v-btn> -->
-      <!--   </v-col> -->
-    </v-row>
+    <!-- <v-row no-gutters> -->
+    <!--   <v-col :md="4" > -->
+    <!--     <v-btn -->
+    <!--       :ripple="false" -->
+    <!--       :key="index" -->
+    <!--       :value="list.name" -->
+    <!--        -->
+    <!--       :prepend-icon="list.icon" -->
+    <!--       rounded="lg" -->
+    <!--       width="100%" -->
+    <!--       grow -->
+    <!--       :style="`border-left: 4px solid ${list.color}; color: ${list.color}`" -->
+    <!--     > -->
+    <!--       {{ list.name }} -->
+    <!--     </v-btn> -->
+    <!--   </v-col> -->
+    <!-- </v-row> -->
     <!-- </v-container> -->
 
     <v-window v-model="activeTab">
@@ -109,13 +115,13 @@
               </v-tooltip>
             </div>
             <div style="font-size: 18px" class="font-weight-bold">
-              Black URL List
+              URL Lists
             </div>
             <v-spacer />
 
             <v-text-field
               v-model="search"
-              class="mt-6"
+              class="mt-6 me-2"
               max-width="400"
               label="Search URL"
               menu-icon=""
@@ -126,16 +132,15 @@
               item-props
               border
             ></v-text-field>
-            <v-btn variant="flat" class="ml-3 mt-1"> Search </v-btn>
-            <v-btn
-              class="px-2 mx-2"
-              prepend-icon="mdi-plus"
-              height="42"
-              variant="text"
-              text="Add a URL"
-              border="sm"
-              @click="add"
-            ></v-btn>
+            <!-- <v-btn variant="flat" class="ml-3 mt-1"> Search </v-btn> -->
+            <!-- <v-btn -->
+            <!--   class="px-2" -->
+            <!--   prepend-icon="mdi-plus" -->
+            <!--   variant="text" -->
+            <!--   text="Add a URL" -->
+            <!--   border="sm" -->
+            <!--   @click="add" -->
+            <!-- ></v-btn> -->
             <!-- <v-btn -->
             <!--   class="px-2 mx-2" -->
             <!--   prepend-icon="mdi-tune" -->
@@ -146,6 +151,17 @@
             <!--   @click="toggleCategoriesManagerDialog" -->
             <!-- ></v-btn> -->
           </v-toolbar>
+
+          <v-tabs class="d-flex">
+            <v-tab
+              v-for="(list, index) in lists"
+              :text="list.name"
+              :style="`background-color: ${list.color}; color: black; `"
+              class="flex-grow-1"
+              @click.prevent="activeTab = list.id"
+            ></v-tab>
+          </v-tabs>
+
           <v-data-table
             density="compact"
             items-per-page="20"
@@ -420,6 +436,11 @@
 
         <v-spacer></v-spacer>
 
+        <v-btn
+          text="Add"
+          v-tooltip:top="'Add URL without closing the dialog'"
+          @click="save"
+        ></v-btn>
         <v-btn text="Save" @click="save"></v-btn>
       </v-card-actions>
     </v-card>
