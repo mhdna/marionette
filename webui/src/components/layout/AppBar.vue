@@ -40,15 +40,20 @@
     <v-app-bar-title>
       <div class="d-flex align-center">
         <!-- <div style="font-family: serif; font-size: 20px">Marionette</div> -->
-        <v-tabs v-if="tabs.length > 0">
-          <v-tab
-            v-for="tab in tabs"
-            :key="tab.to"
-            :to="tab.to"
-            :text="tab.text"
-            :value="tab.to"
-          ></v-tab>
-        </v-tabs>
+        <!-- <div style="font-size: 20px">Dashboard</div> -->
+        <AppTitleWithDot2 />
+        <!-- <v-breadcrumbs :items="items"> </v-breadcrumbs> -->
+
+        <!-- <SnackBar /> -->
+        <!--     <v-tabs v-if="tabs.length > 0"> -->
+        <!--       <v-tab -->
+        <!--         v-for="tab in tabs" -->
+        <!--         :key="tab.to" -->
+        <!--         :to="tab.to" -->
+        <!--         :text="tab.text" -->
+        <!--         :value="tab.to" -->
+        <!--       ></v-tab> -->
+        <!--     </v-tabs> -->
       </div>
     </v-app-bar-title>
     <!-- <v-text-field -->
