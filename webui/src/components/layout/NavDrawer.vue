@@ -5,11 +5,14 @@
   <v-navigation-drawer
     absolute
     app
-    :rail="props.isRail"
+    mobile-breakpoint="sm"
+    :rail="isRail"
     :model-value="props.showDrawer"
     @update:model-value="emit('update:showDrawer', $event)"
+    :temporary="smAndDown"
     class="position-fixed"
   >
+    <!-- :rail="props.isRail" -->
     <!-- width="240" -->
     <!-- :temporary="isDock" -->
     <!-- :model-value="isDock || props.showDrawer" -->
@@ -106,7 +109,8 @@ const { t } = useI18n();
 
 import { useDisplay } from "vuetify";
 
-// const { mobile } = useDisplay();
+const { mobile, smAndDown } = useDisplay();
+// const { sm } = useDisplay();
 // const isRail = ref(false);
 
 interface MenuItem {
@@ -300,7 +304,7 @@ const items = computed<MenuItem[]>(() => [
 //   ["Delete", "mdi-delete"],
 // ];
 
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import { useTheme } from "vuetify";
 
 const open = ref([t("proxy_config")]);
@@ -312,9 +316,15 @@ const open = ref([t("proxy_config")]);
 // );
 
 const props = defineProps<{
-  isRail: boolean;
+  // isRail: boolean;
   showDrawer: boolean;
 }>();
+
+const isRail = ref(false);
+
+watchEffect(() => {
+  isRail.value = mobile.value && !smAndDown.value;
+});
 
 const emit = defineEmits(["update:showDrawer"]);
 

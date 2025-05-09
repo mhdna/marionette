@@ -27,21 +27,24 @@ function toggleUsersDrawer() {
   showUsersDrawer.value = !showUsersDrawer.value;
 }
 
-const { mobile } = useDisplay();
+const { mobile, sm } = useDisplay();
 
-// const isRail = ref(false);
-const showNavigationDrawer = ref(!mobile.value); // required for initial state to depend on mobile or not
+const isRail = ref(false);
+const showNavigationDrawer = ref(!sm.value); // required for initial state to depend on mobile or not
 
 const toggleNavigationDrawer = () => {
-  if (mobile.value) {
-    isRail.value = false;
-    showNavigationDrawer.value = !showNavigationDrawer.value;
-  } else {
-    isRail.value = !isRail.value;
-  }
+  // if (mobile.value) {
+  //   isRail.value = true;
+  showNavigationDrawer.value = !showNavigationDrawer.value;
+  // } else if (sm.value) {
+  //   isRail.value = false;
+  //   showNavigationDrawer.value = !showNavigationDrawer.value;
+  // } else {
+  //   isRail.value = !isRail.value;
+  // }
 };
 
-const loading = ref(true);
+// const loading = ref(true);
 
 onMounted(() =>
   setTimeout(() => {
