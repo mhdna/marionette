@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    location="right"
+    location="end"
     class="position-fixed overflow-y-auto"
     :rail="isRail"
     :model-value="props.showDrawer"
