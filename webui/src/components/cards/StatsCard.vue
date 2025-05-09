@@ -26,21 +26,20 @@
 <!-- </template> -->
 
 <template>
-  <div class="bg-black mt-3" style="font-size: 15px; font-family: monospace">
+  <div class="mt-1 mx-2" style="font-size: 15px; font-family: monospace">
     <div class="d-flex justify-center align-center pt-1">
-      <div style="color: #00ff00" class="d-flex align-center pb-5 pe-2">
+      <div style="color: #00ff00" class="d-flex align-center pe-2">
         <!-- <v-icon icon="mdi-brain" size="small" class="me-1"> </v-icon> -->
         <div class="mx-1">CPU</div>
         21%
       </div>
       <v-sparkline
-        class="mt-n4 py-2"
         auto-draw
         :model-value="values1"
         :padding="3"
-        :line-width="4"
+        :line-width="3"
         color="#00ff00"
-        height="30"
+        height="25"
       />
     </div>
 
@@ -54,11 +53,25 @@
         auto-draw
         :model-value="values2"
         :padding="3"
-        :line-width="4"
+        :line-width="3"
         color="#ffff00"
-        height="30"
+        height="25"
       />
     </div>
+    <!-- <div class="d-flex justify-center align-center pb-1"> -->
+    <!--   <div style="color: #f00" class="d-flex align-center pe-2"> -->
+    <!--     <div class="mx-1">BDW</div> -->
+    <!--     338 -->
+    <!--   </div> -->
+    <!--   <v-sparkline -->
+    <!--     auto-draw -->
+    <!--     :model-value="values2" -->
+    <!--     :padding="3" -->
+    <!--     :line-width="3" -->
+    <!--     color="#f00" -->
+    <!--     height="25" -->
+    <!--   /> -->
+    <!-- </div> -->
   </div>
 </template>
 
