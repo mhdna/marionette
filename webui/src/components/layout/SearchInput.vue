@@ -7,7 +7,7 @@
     :items="items"
     prepend-inner-icon="mdi-magnify"
     flat
-    variant="solo"
+    variant="outlined"
     density="compact"
     hide-details
     single-line
