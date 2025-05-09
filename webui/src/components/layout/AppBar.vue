@@ -1,12 +1,10 @@
 <template>
   <!-- text-black -->
-  <v-app-bar density="compact" class="position-fixed" :elevation="0">
+  <v-app-bar density="compact" class="position-fixed" :elevation="2">
     <template v-slot:prepend>
-      <v-app-bar-nav-icon
-        @click="emit('toggleNavigationDrawer')"
-        v-tooltip:bottom="'Toggle navigation drawer'"
-      >
+      <v-app-bar-nav-icon @click="emit('toggleNavigationDrawer')">
       </v-app-bar-nav-icon>
+      <!-- v-tooltip:bottom="'Toggle navigation drawer'" -->
 
       <!-- <v-sheet elevation="6">
         <v-tabs
@@ -67,29 +65,24 @@
     <!--   single-line -->
     <!-- ></v-text-field> -->
     <v-col cols="12" sm="6" md="3" v-show="!smAndDown">
-      <SearchInput class="mr-4" />
+      <SearchInput />
     </v-col>
     <!-- <SearchInputDialog class="mr-4" /> -->
     <template v-slot:append>
       <!-- FIXME rtl not working properly -->
       <div class="d-flex justify-space-between align-center">
-        <v-btn
-          @click="emit('toggleUsersDrawer')"
-          v-tooltip:bottom="'Toggle Users Drawer'"
-        >
-          <b class="me-1">25/51</b>
+        <v-btn @click="emit('toggleUsersDrawer')">
+          <!-- v-tooltip:bottom="'Toggle Users Drawer'" -->
+          <b>25/51</b>
           <v-icon size="x-large" icon="mdi-account-multiple" />
         </v-btn>
-        <div>
+        <div class="d-flex justify-center align-center">
           <Notifications />
-        </div>
-        <div>
           <ToggleTheme />
-        </div>
-        <div class="me-1">
           <ChangeLanguage />
         </div>
       </div>
+      <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
     </template>
   </v-app-bar>
 </template>
@@ -112,13 +105,44 @@ const props = withDefaults(
   }>(),
   {
     tabs: [],
-  },
+  }
 );
 
 const emit = defineEmits<{
   (e: "toggleNavigationDrawer"): void;
   (e: "toggleUsersDrawer"): void;
 }>();
+
+const items = ref([
+  {
+    title: "Dashboard",
+    disabled: false,
+    href: "breadcrumbs_dashboard",
+  },
+  {
+    title: "Link 1",
+    disabled: false,
+    href: "breadcrumbs_link_1",
+  },
+]);
+
+import { useRouter } from "vue-router";
+
+const loading = ref(true);
+const router = useRouter();
+
+onMounted(() => {
+  router.beforeEach((to, from, next) => {
+    loading.value = true;
+    next();
+  });
+
+  router.afterEach(() => {
+    setTimeout(() => {
+      loading.value = false;
+    }, 500);
+  });
+});
 </script>
 
 <!-- <script setup lang="ts"> -->
