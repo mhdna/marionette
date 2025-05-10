@@ -1,12 +1,5 @@
 <!-- <script lang="ts" setup>
-// import Sidebar from "@/components/layout/Sidebar";
 import { ref } from "vue";
-
-// // import Footer from "@/components/layout/Footer.vue";
-// import ChangeLocale from "@/components/buttons/ChangeLocale.vue";
-// import LoadingOverlay from "@/components/layout/LoadingOverlay.vue";
-
-// import Dialog from "@/components/Dialog.vue";
 
 // const loading = ref(false);
 
