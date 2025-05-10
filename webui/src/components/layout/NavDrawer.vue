@@ -42,23 +42,6 @@
         </template>
       </v-list-item>
       <div v-if="!isRail">
-        <v-list-item>
-          <template v-slot:prepend>
-            <v-avatar size="40" class="avatar-align">
-              <!-- <v-img src="https://cdn.vuetifyjs.com/images/lists/4.jpg" /> -->
-              <v-img src="/profile.jpg" />
-            </v-avatar>
-          </template>
-          <template v-slot:append>
-            <div>
-              <v-list-item-title>Papa Mahdi</v-list-item-title>
-              <!-- <v-list-item-title>Rashel Gabriel</v-list-item-title> -->
-              <!-- FIXME if so long it'll push the arrow to the right -->
-              <v-list-item-subtitle>mahdi@gmail.com</v-list-item-subtitle>
-            </div>
-            <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn>
-          </template>
-        </v-list-item>
         <StatsCard />
       </div>
       <!-- <Dot v-else /> -->
