@@ -9,7 +9,7 @@
     :rail="isRail"
     :model-value="props.showDrawer"
     @update:model-value="emit('update:showDrawer', $event)"
-    :temporary="smAndDown"
+    :temporary="xs"
     class="position-fixed"
   >
     <!-- :rail="props.isRail" -->
@@ -126,7 +126,7 @@ const { t } = useI18n();
 
 import { useDisplay } from "vuetify";
 
-const { mobile, smAndDown } = useDisplay();
+const { mobile, xs } = useDisplay();
 // const { sm } = useDisplay();
 // const isRail = ref(false);
 
@@ -340,7 +340,7 @@ const props = defineProps<{
 const isRail = ref(false);
 
 watchEffect(() => {
-  isRail.value = mobile.value && !smAndDown.value;
+  isRail.value = mobile.value && !xs.value;
 });
 
 const emit = defineEmits(["update:showDrawer"]);
