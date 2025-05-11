@@ -1,8 +1,11 @@
 <template>
-  <div
+  <!-- TODO to link needs to be dynamic -->
+  <router-link
+    to="/dashboard/overview"
     class="d-flex justify-center"
-    style="font-family: Lobster; font-size: 28px"
+    style="all: unset; font-family: Lobster; font-size: 28px; cursor: pointer"
   >
+    <!-- TODO make it glow more on hover -->
     <!-- style="font-family: Lobster; font-size: 33px; position: relative" -->
     <div
       style="
