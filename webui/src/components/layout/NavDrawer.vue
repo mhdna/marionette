@@ -6,7 +6,7 @@
     absolute
     app
     mobile-breakpoint="sm"
-    :rail="isRail"
+    :rail="props.isRail"
     :model-value="props.showDrawer"
     @update:model-value="emit('update:showDrawer', $event)"
     :temporary="xs"
@@ -41,7 +41,7 @@
           <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn>
         </template>
       </v-list-item>
-      <div v-if="!isRail">
+      <div v-if="!props.isRail">
         <StatsCard />
       </div>
       <!-- <Dot v-else /> -->
@@ -62,12 +62,12 @@
     <v-list density="compact" v-model:opened="open">
       <!-- class="mt-0 pt-0" -->
       <!-- <v-list-item class="text-center"> -->
-      <!-- <SearchInput v-show="!smAndDown" /> -->
+      <!-- <SearchInput v-show="!xs" /> -->
       <!-- <SearchInput /> -->
       <!-- <SearchInputDialog class="mr-4" /> -->
       <!-- </v-list-item> -->
       <MenuItem
-        :isRail="isRail"
+        :isRail="props.isRail"
         v-for="item in items"
         :item="item"
         :key="item.text"
@@ -115,8 +115,10 @@ const { mobile, xs } = useDisplay();
 
 interface MenuItem {
   text: string;
+  value: string;
   icon: string;
   to?: string;
+  id: string;
   subItems?: MenuItem[];
 }
 
@@ -127,13 +129,15 @@ const bottomItems = computed<MenuItem[]>(() => [
     // icon: "mid-account-group-outline",
     icon: "mdi-cog",
     to: "/settings",
+    id: "settings",
   },
   {
-    text: t("Ask for Help"),
+    text: "Page Help",
     value: "help",
     // icon: "mid-account-group-outline",
     icon: "mdi-help-circle-outline",
     to: "/bugs",
+    id: "page-help",
   },
   // {
   //   text: t("Report a bug"),
@@ -152,23 +156,27 @@ const items = computed<MenuItem[]>(() => [
     // icon: "mdi-monitor-dashboard",
     icon: "mdi-view-dashboard",
     to: "/dashboard/",
+    id: "dashboard-page",
     subItems: [
       {
         text: "Overview",
         value: "overview",
         icon: "mdi-square",
+        id: "overview-page",
         to: "/dashboard/overview",
       },
       {
         text: "Time Tables",
         value: "time_tables",
         icon: "mdi-clock",
+        id: "timetables-page",
         to: "/dashboard/time_tables",
       },
       {
         text: "Internet Usage",
         value: "internet_usage",
         icon: "mdi-link",
+        id: "internet-usage-page",
         to: "/dashboard/internet_usage",
       },
       // {
@@ -181,12 +189,14 @@ const items = computed<MenuItem[]>(() => [
         text: "Screenshots",
         value: "screenshots",
         icon: "mdi-image",
+        id: "screenshots-page",
         to: "/dashboard/screenshots",
       },
       {
         text: "Key Loggers",
         value: "keyloggers",
         icon: "mdi-keyboard",
+        id: "keyloggers-page",
         to: "/dashboard/keyloggers",
       },
     ],
@@ -196,23 +206,27 @@ const items = computed<MenuItem[]>(() => [
     icon: "mdi-server-network",
     value: "proxy_config",
     to: "/proxy",
+    id: "proxy-page",
     subItems: [
       {
         text: "URL Lists",
         value: "url_list",
         icon: "mdi-link",
+        id: "url-page",
         to: "/proxy/urls",
       },
       {
         text: "Phrases",
         value: "phrases",
         icon: "mdi-file-word-box",
+        id: "phrases-page",
         to: "/proxy/phrases",
       },
       {
         text: "Redirects",
         value: "redirects",
         icon: "mdi-arrow-down-right",
+        id: "redirects-page",
         to: "/proxy/redirects",
       },
       // {
@@ -239,6 +253,7 @@ const items = computed<MenuItem[]>(() => [
     text: "App Settings",
     value: "apps",
     icon: "mdi-application",
+    id: "settings-page",
     to: "/apps",
   },
   // {
@@ -257,12 +272,14 @@ const items = computed<MenuItem[]>(() => [
     text: "Live Chat",
     value: "livechat",
     icon: "mdi-chat",
+    id: "chat-page",
     to: "/chat",
   },
   {
     text: "Requests",
     value: "acknowledgements",
     icon: "mdi-email-newsletter",
+    id: "requests-page",
     to: "/acknowledgements",
   },
   // {
@@ -288,6 +305,7 @@ const items = computed<MenuItem[]>(() => [
     value: "users",
     // icon: "mid-account-group-outline",
     icon: "mdi-account-group",
+    id: "users-page",
     to: "/users",
   },
   // { text: "Backups", icon: "mdi-cloud-upload" },
@@ -304,7 +322,8 @@ const items = computed<MenuItem[]>(() => [
 //   ["Delete", "mdi-delete"],
 // ];
 
-import { ref, watchEffect } from "vue";
+// import { ref, watchEffect } from "vue";
+import { ref } from "vue";
 import { useTheme } from "vuetify";
 
 const open = ref([t("proxy_config")]);
@@ -316,15 +335,15 @@ const open = ref([t("proxy_config")]);
 // );
 
 const props = defineProps<{
-  // isRail: boolean;
+  isRail: boolean;
   showDrawer: boolean;
 }>();
 
 const isRail = ref(false);
 
-watchEffect(() => {
-  isRail.value = mobile.value && !xs.value;
-});
+// watchEffect(() => {
+//   isRail.value = mobile.value && !xs.value;
+// });
 
 const emit = defineEmits(["update:showDrawer"]);
 
@@ -356,6 +375,7 @@ const emit = defineEmits(["update:showDrawer"]);
   justify-content: center;
   align-items: center; */
 }
+
 .avatar-align {
   margin-left: -6px;
 }

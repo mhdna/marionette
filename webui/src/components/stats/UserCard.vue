@@ -23,7 +23,7 @@
             <!--                   > -->
             <!--                     <template v-slot:activator="{ props }"> -->
             <UserInfoMenu>
-              <v-avatar size="36">
+              <v-avatar size="36" id="user-avatar">
                 <!-- <v-badge color="success" dot> -->
                 <v-img :src="item.prependAvatar" />
                 <!-- </v-badge> -->

@@ -6,6 +6,7 @@
     id="summaries-card"
   >
     <SummaryCard
+      id="summaries-card"
       min-width="203"
       title="# Of Successful Requests"
       count="10,230"

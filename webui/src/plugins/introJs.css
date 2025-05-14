@@ -1,0 +1,83 @@
+/* Custom intro.js styles */
+
+/* Background color of tooltips */
+.introjs-tooltip {
+  background-color: #770000;
+  color: white;
+}
+
+/* Button colors */
+.introjs-button {
+  background-color: #000000;
+  color: white;
+  text-shadow: none;
+  border: none;
+  font-weight: bold;
+}
+
+.introjs-button:hover {
+  background-color: #444444;
+  color: white;
+}
+
+/* Next button specific styling */
+.introjs-nextbutton {
+  background-color: #000000;
+  color: white;
+}
+
+.introjs-nextbutton:hover {
+  background-color: #444444;
+  color: white;
+}
+
+/* Bullet colors (the dots) */
+.introjs-bullets ul li a {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.introjs-bullets ul li a.active {
+  background-color: white;
+}
+
+/* Highlight color for focused elements */
+.introjs-helperLayer {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 3px solid #aa0000;
+}
+
+/* Progress bar color */
+.introjs-progressbar {
+  background-color: #000000;
+}
+/* Target the skip button specifically */
+.introjs-skipbutton {
+  /* Size adjustments */
+  padding: 0px !important; /* Smaller padding */
+  font-size: 14px !important; /* Smaller font */
+
+  /* Position adjustments (if needed) */
+  margin-top: 5px !important;
+  margin-right: 10px !important;
+
+  /* Optional styling */
+  border-radius: 4px !important;
+  font-weight: bold !important;
+  /* opacity: 0.7;  */
+  /* Make it slightly less prominent */
+  border: 1px solid #ccc !important;
+  background: #f4f4f4 !important;
+  color: #282828 !important;
+}
+
+/* Hover state */
+.introjs-skipbutton:hover {
+  opacity: 1;
+  background: #e0e0e0 !important;
+}
+
+/* Fix any possible conflicts with other buttons */
+.introjs-button.introjs-skipbutton {
+  /* Ensure these styles take precedence */
+  line-height: 1.2 !important;
+}

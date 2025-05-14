@@ -26,7 +26,11 @@
 <!-- </template> -->
 
 <template>
-  <div class="mt-1 mx-2" style="font-size: 15px; font-family: monospace">
+  <div
+    class="mt-1 px-1 bg-black"
+    id="stats-card"
+    style="font-size: 15px; font-family: monospace"
+  >
     <div class="d-flex justify-center align-center pt-1">
       <div style="color: #00ff00" class="d-flex align-center pe-2">
         <!-- <v-icon icon="mdi-brain" size="small" class="me-1"> </v-icon> -->
