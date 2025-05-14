@@ -25,8 +25,7 @@ import { GridComponent, TooltipComponent } from "echarts/components";
 // import uPlot from "uplot";
 // import UplotVue from "uplot-vue";
 // import "uplot/dist/uPlot.min.css";
-import Vue3Tour from "vue3-tour";
-import "vue3-tour/dist/vue3-tour.css";
+import VueIntro from "intro.js";
 
 // Types
 import type { App } from "vue";
@@ -35,7 +34,7 @@ export function registerPlugins(app: App) {
   app.component("v-chart", ECharts);
   // .use(VueChartkick)
   // .use(VueApexCharts)
-  app.use(i18n).use(vuetify).use(router).use(pinia).use(Vue3Tour);
+  app.use(i18n).use(vuetify).use(router).use(pinia).use(VueIntro);
   // .use(UplotVue)
   // app.config.globalProperties.$t = i18n.global.t;
 }

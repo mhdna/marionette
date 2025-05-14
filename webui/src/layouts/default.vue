@@ -138,7 +138,9 @@ const tabs: Tab[] = [
         <!-- <SetupGuide /> -->
         <!-- <LoadingOverlay :loading="loading" /> -->
         <!-- <h1>Dashboard</h1> -->
-        <router-view />
+        <AppTour>
+          <router-view />
+        </AppTour>
       </v-main>
       <!-- <div id="navi"> -->
       <!--   <v-speed-dial -->
