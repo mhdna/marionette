@@ -28,13 +28,13 @@
       </RoundedCard>
     </div>
     <div class="d-flex mt-4">
-      <RoundedCard class="me-0 me-2">
+      <RoundedCard class="me-2">
         <div>
           <CardToolbar title="Most Active Users" />
           <UsersList />
         </div>
       </RoundedCard>
-      <RoundedCard class="me-0 me-2">
+      <RoundedCard>
         <div>
           <CardToolbar title="Most Productive Users" />
           <UsersList />
@@ -54,7 +54,7 @@
           <AppsList />
         </div>
       </RoundedCard>
-      <RoundedCard class="me-0" min-height="200">
+      <RoundedCard class="me-0">
         <div>
           <CardToolbar title="Categorically" />
           <ETreeMap />
