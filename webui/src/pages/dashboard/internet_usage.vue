@@ -41,26 +41,20 @@
   </v-row>
   <LoadingTable />
 
-  <v-row>
-    <v-col :md="5">
-      <v-card rounded class="mx-4" max-height="300">
-        <v-toolbar class="px-4" height="54">
-          <h2 class="text-h6">Categories</h2>
-          <v-spacer />
-        </v-toolbar>
-        <v-card-text>
-          <v-row>
-            <EPieChart />
-          </v-row>
-          <v-row>
-            <EPieChart />
-          </v-row>
-        </v-card-text>
-        <!-- <PolarArea /> -->
-        <!-- <PieChart /> -->
-        <!-- <PieChart /> -->
-        <!-- <CategoriesBar /> -->
-      </v-card>
-    </v-col>
-  </v-row>
+  <div class="d-flex mb-4">
+    <RoundedCard class="mx-4 me-0">
+      <CardToolbar title="Most Visited Categories" />
+      <div class="px-4 pb-4 flex-md-grow-1">
+        <EPieChart />
+        <WebsitesList />
+      </div>
+    </RoundedCard>
+    <RoundedCard class="mx-4">
+      <CardToolbar title="Most Banned Categories" />
+      <div class="px-4 flex-md-grow-1">
+        <EPieChart />
+        <WebsitesList />
+      </div>
+    </RoundedCard>
+  </div>
 </template>
