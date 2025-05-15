@@ -2,11 +2,8 @@
   <div class="text-center">
     <v-menu v-model="menu">
       <template v-slot:activator="{ props }">
-        <v-btn
-          v-tooltip:bottom="'Change Language'"
-          v-bind="props"
-          icon="mdi-translate"
-        ></v-btn>
+        <v-btn v-bind="props" icon="mdi-translate"></v-btn>
+        <!-- v-tooltip:bottom="'Change Language'" -->
       </template>
 
       <v-card>
@@ -24,7 +21,7 @@
           </v-list-item>
           <!-- prepend-avatar="/flags/lb.svg" -->
           <v-list-item
-            title="Arabic"
+            title="Arabic (العربية)"
             class="text-left"
             @click="changeLocale('ar')"
           >

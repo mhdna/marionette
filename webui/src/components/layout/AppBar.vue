@@ -70,17 +70,16 @@
     <!-- <SearchInputDialog class="mr-4" /> -->
     <template v-slot:append>
       <!-- FIXME rtl not working properly -->
-      <div class="d-flex justify-space-between align-center">
-        <v-btn @click="emit('toggleUsersDrawer')">
+      <div class="d-flex align-center">
+        <v-btn class="me-1" @click="emit('toggleUsersDrawer')">
           <!-- v-tooltip:bottom="'Toggle Users Drawer'" -->
-          <b>25/51</b>
+          <b class="me-1">25/51</b>
           <v-icon size="x-large" icon="mdi-account-multiple" />
         </v-btn>
-        <div class="d-flex justify-center align-center">
-          <Notifications />
-          <ToggleTheme />
-          <ChangeLanguage />
-        </div>
+
+        <Notifications class="me-3" />
+        <ToggleTheme />
+        <ChangeLanguage />
       </div>
       <v-progress-linear v-if="loading" indeterminate></v-progress-linear>
     </template>

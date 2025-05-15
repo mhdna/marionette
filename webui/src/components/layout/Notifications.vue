@@ -1,11 +1,11 @@
 <!-- TODO properize this -->
 <template>
-  <div class="text-center">
+  <div class="text-center d-flex justify-space-between align-center">
     <v-menu v-model="menu" :close-on-content-click="false">
       <template v-slot:activator="{ props }">
         <!-- <v-tooltip text="Notifications" max-width="300" location="bottom"> -->
         <!--   <template v-slot:activator="{ props }"> -->
-        <v-badge class="mr-3" v-bind="props" color="red-darken-4" content="9+">
+        <v-badge v-bind="props" class="me-1" color="red-darken-4" content="9+">
           <v-icon v-bind="on">mdi-bell</v-icon>
         </v-badge>
         <!--   </template> -->

@@ -1,6 +1,7 @@
 <template>
   <!-- TODO auto theme and list chosen -->
-  <v-btn v-tooltip:bottom="'Toggle Theme'" @click="toggleTheme" icon>
+  <v-btn @click="toggleTheme" icon>
+    <!-- v-tooltip:bottom="'Toggle Theme'" -->
     <!-- <v-icon :style="{ -->
     <!--   color: theme.global.current.value.dark ? 'darkblue' : 'yellow', -->
     <!-- }"> -->
