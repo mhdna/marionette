@@ -42,13 +42,13 @@
       </RoundedCard>
     </div>
     <div class="d-flex mt-4">
-      <RoundedCard class="me-0 me-2" min-height="490">
+      <RoundedCard class="me-0 me-2">
         <div>
           <CardToolbar title="Most Used Apps" />
           <AppsList />
         </div>
       </RoundedCard>
-      <RoundedCard class="me-0 me-2" min-height="490">
+      <RoundedCard class="me-0 me-2">
         <div>
           <CardToolbar title="Most Occuring Window Titles" />
           <AppsList />
