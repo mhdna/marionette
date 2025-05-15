@@ -6,7 +6,7 @@
   >
     <template v-slot:headline>
       <div class="d-flex flex-column justify-center align-center">
-        <SadDot size="120" class="mb-4" />
+        <SadDot size="120" class="mb-4 v-locale--is-ltr" />
         <!-- foce ltr so that the face is not flipped -->
         <div>Whoops, 404</div>
       </div>
