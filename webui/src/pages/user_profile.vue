@@ -36,7 +36,8 @@
         </div>
       </div>
       <v-divider thickness="2" class="mt-0 mb-8" />
-      <BarChart />
+      <ProfileChart />
+      <!-- <BarChart /> -->
       <EHeatmap />
     </RoundedCard>
   </v-container>
