@@ -81,3 +81,10 @@
   /* Ensure these styles take precedence */
   line-height: 1.2 !important;
 }
+.introjs-arrow.bottom,
+.introjs-arrow.bottom-middle,
+.introjs-arrow.bottom-right {
+  border-color: rgba(119, 0, 0, 0.8) transparent transparent;
+  bottom: -20px;
+  left: 20px;
+}
