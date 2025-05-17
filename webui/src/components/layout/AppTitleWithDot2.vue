@@ -3,7 +3,7 @@
   <router-link
     to="/dashboard/overview"
     class="d-flex justify-center"
-    style="all: unset; font-family: Lobster; font-size: 28px; cursor: pointer"
+    style="all: unset; font-size: 28px; cursor: pointer"
   >
     <!-- TODO make it glow more on hover -->
     <!-- style="font-family: Lobster; font-size: 33px; position: relative" -->
@@ -21,15 +21,18 @@
     </div>
     <div class="d-flex justify-center align-center">
       <Dot class="me-1" />
-      <div class="mb-1">
-        <span>mar</span>
-        <!-- <span style="color: #a00">i</span> -->
-        <span>i</span>
-        <span>onette</span>
+      <div :class="`mb-1 app-title ${lang === 'ar' ? 'app-title-arabic' : ''}`">
+        {{ $t("apptitle") }}
       </div>
     </div>
-  </div>
+  </router-link>
 </template>
+
+<script setup lang="ts">
+const props = defineProps<{
+  lang: string;
+}>();
+</script>
 
 <style scoped>
 /* .text { */

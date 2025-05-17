@@ -39,8 +39,8 @@
       <div class="d-flex align-center">
         <!-- <div style="font-family: serif; font-size: 20px">Marionette</div> -->
         <!-- <div style="font-size: 20px">Dashboard</div> -->
-        <AppTitleWithDot2 />
-        <!-- <v-breadcrumbs :items="items"> </v-breadcrumbs> -->
+        <AppTitleWithDot2 :lang="current" />
+        <NavigationLinks :isRtl="isRtl" />
 
         <!-- <SnackBar /> -->
         <!--     <v-tabs v-if="tabs.length > 0"> -->
@@ -126,6 +126,9 @@ const items = ref([
 ]);
 
 import { useRouter } from "vue-router";
+import { useLocale } from "vuetify";
+
+const { current, isRtl } = useLocale();
 
 const loading = ref(true);
 const router = useRouter();

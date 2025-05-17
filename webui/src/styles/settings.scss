@@ -8,6 +8,8 @@
 // https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/settings/_variables.scss
 $font: "Roboto", "Albert Sans", "Baloo Bhaijaan 2", sans-serif;
 $font-heading: "Roboto", "Lalezar", serif;
+$font-app-title: "Lobster", "Aref Ruqaa", sans-serif;
+
 /* Lily Script One */
 
 /* $font-size-root: 1.1rem */
@@ -16,3 +18,16 @@ $font-heading: "Roboto", "Lalezar", serif;
     $heading-font-family: $font-heading,
     $navigation-drawer-transition-duration: "0.1s"
 );
+
+.app-title {
+  font-family: $font-app-title;
+}
+
+.app-title-arabic {
+  font-size: 1.2em; // adjust as needed
+  font-weight: bold;
+}
+
+.flip-in-rtl {
+  transform: rotate(180deg);
+}
