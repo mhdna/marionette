@@ -1,45 +1,29 @@
 <!-- TODO: Setup search, see server-side stuff -->
 <!-- BUG: if table has not be fetched yet, length would be zero, and the page will break -->
 <template>
-  <v-card class="ma-4">
-    <v-toolbar class="px-4" height="54">
-      <v-icon class="cursor-pointer mr-4" color="grey"
-        >mdi-help-circle-outline</v-icon
-      >
-      <v-text-field
-        v-model="search"
-        class="mt-6"
-        max-width="400"
-        label="Search URL, group, or type"
-        menu-icon=""
+  <!-- <RoundedCard class="me-0 me-2"> -->
+  <div>
+    <!-- <CardToolbar title="Requests Rate" /> -->
+    <div class="px-2">
+      <v-data-table-server
+        v-model:items-per-page="itemsPerPage"
+        :headers="headers"
         density="compact"
-        variant="outlined"
-        prepend-inner-icon="mdi-magnify"
-        auto-select-first
-        item-props
-        border
-      ></v-text-field>
-      <v-btn variant="flat" class="ml-3 mt-1"> Search </v-btn>
-    </v-toolbar>
-    <v-data-table-server
-      v-model:items-per-page="itemsPerPage"
-      :headers="headers"
-      density="compact"
-      :items="serverItems"
-      :items-length="totalItems"
-      :loading="loading"
-      :search="search"
-      @update:options="loadItems"
-    >
-      <template v-slot:item.entry_group="{ value }">
-        <v-chip
-          :color="getGroupColor(value)"
-          :text="value"
-          size="x-medium"
-        ></v-chip>
-      </template>
+        :items="serverItems"
+        :items-length="totalItems"
+        :loading="loading"
+        :search="search"
+        @update:options="loadItems"
+      >
+        <template v-slot:item.entry_group="{ value }">
+          <v-chip
+            :color="getGroupColor(value)"
+            :text="value"
+            size="x-medium"
+          ></v-chip>
+        </template>
 
-      <!-- <template v-slot:thead>
+        <!-- <template v-slot:thead>
         <tr>
           <td>
             <v-text-field
@@ -108,46 +92,52 @@
           </td>
         </tr>
       </template> -->
-      <!-- <template v-slot:item="{ item }"> -->
-      <!--   <tr class="text-no-wrap"> -->
-      <!--     <td> -->
-      <!--       <v-avatar size="32"> -->
-      <!--         <v-img :src="item.user.image" /> -->
-      <!--       </v-avatar> -->
-      <!--     </td> -->
-      <!--     <td>{{ item.time }}</td> -->
-      <!--     <td>{{ item.ip }}</td> -->
-      <!--     <td :class="`bg-${getColor(item.http_status)}`"> -->
-      <!--       {{ item.http_status }} -->
-      <!--     </td> -->
-      <!--     <td :class="`bg-${getColor(item.http_status)}`"> -->
-      <!--       {{ item.http_method }} -->
-      <!--     </td> -->
-      <!--     <td :class="`bg-${getGroupColor(item.entry_group)}`"> -->
-      <!--       {{ item.entry_group }} -->
-      <!--     </td> -->
-      <!--     <td>{{ item.url }}</td> -->
-      <!--   </tr> -->
-      <!-- </template> -->
+        <!-- <template v-slot:item="{ item }"> -->
+        <!--   <tr class="text-no-wrap"> -->
+        <!--     <td> -->
+        <!--       <v-avatar size="32"> -->
+        <!--         <v-img :src="item.user.image" /> -->
+        <!--       </v-avatar> -->
+        <!--     </td> -->
+        <!--     <td>{{ item.time }}</td> -->
+        <!--     <td>{{ item.ip }}</td> -->
+        <!--     <td :class="`bg-${getColor(item.http_status)}`"> -->
+        <!--       {{ item.http_status }} -->
+        <!--     </td> -->
+        <!--     <td :class="`bg-${getColor(item.http_status)}`"> -->
+        <!--       {{ item.http_method }} -->
+        <!--     </td> -->
+        <!--     <td :class="`bg-${getGroupColor(item.entry_group)}`"> -->
+        <!--       {{ item.entry_group }} -->
+        <!--     </td> -->
+        <!--     <td>{{ item.url }}</td> -->
+        <!--   </tr> -->
+        <!-- </template> -->
 
-      <template v-slot:item.http_status="{ value }">
-        <v-chip :color="getColor(value)" :text="value" size="x-medium"></v-chip>
-      </template>
-      <template v-slot:item.url="{ value }">
-        <div
-          style="white-space: nowrap; max-width: 750px"
-          class="overflow-x-auto"
-        >
-          {{ value }}
-        </div>
-      </template>
-      <template v-slot:item.user="{ value }">
-        <v-avatar size="32">
-          <v-img :src="value.image" />
-        </v-avatar>
-      </template>
-    </v-data-table-server>
-  </v-card>
+        <template v-slot:item.http_status="{ value }">
+          <v-chip
+            :color="getColor(value)"
+            :text="value"
+            size="x-medium"
+          ></v-chip>
+        </template>
+        <template v-slot:item.url="{ value }">
+          <div
+            style="white-space: nowrap; max-width: 750px"
+            class="overflow-x-auto"
+          >
+            {{ value }}
+          </div>
+        </template>
+        <template v-slot:item.user="{ value }">
+          <v-avatar size="32">
+            <v-img :src="value.image" />
+          </v-avatar>
+        </template>
+      </v-data-table-server>
+    </div>
+  </div>
+  <!-- </RoundedCard> -->
 </template>
 
 <script setup lang="ts">
@@ -161,11 +151,11 @@ const search = ref("");
 
 const itemsPerPage = 15;
 const headers = computed(() => [
-  {
-    title: "User",
-    key: "user",
-    align: "start" as "start" | "end" | "center" | undefined, // FIXME this is super verbose
-  },
+  // {
+  //   title: "User",
+  //   key: "user",
+  //   align: "start" as "start" | "end" | "center" | undefined, // FIXME this is super verbose
+  // },
   {
     title: "Date",
     key: "date",
