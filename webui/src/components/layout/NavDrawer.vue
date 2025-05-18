@@ -11,6 +11,7 @@
     @update:model-value="emit('update:showDrawer', $event)"
     :temporary="xs"
     class="position-fixed"
+    rail
   >
     <!-- :rail="props.isRail" -->
     <!-- width="240" -->
@@ -41,9 +42,6 @@
           <v-btn icon="mdi-menu-down" size="small" variant="text"></v-btn>
         </template>
       </v-list-item>
-      <div v-if="!props.isRail">
-        <StatsCard />
-      </div>
       <!-- <Dot v-else /> -->
       <!-- </div> -->
       <!-- <v-avatar size="50px"> -->
@@ -75,11 +73,20 @@
     </v-list>
 
     <template v-slot:append>
+      <!-- <div v-if="!props.isRail"> -->
+      <!-- <StatsCard /> -->
+      <!-- </div> -->
       <v-list density="compact">
         <MenuItem
           v-for="(item, i) in bottomItems"
           :item="item"
           :key="item.text"
+        />
+        <v-list-item
+          prepend-icon="mdi-help-circle-outline"
+          id="page-help"
+          title="Page Help"
+          @click="showPageHelp"
         />
       </v-list>
       <!-- <v-toolbar height="35"> -->
@@ -104,6 +111,16 @@
 <script lang="ts" setup>
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useAppStore } from "@/stores/app";
+import { tourSteps } from "./tourSteps";
+
+const route = useRoute();
+const appStore = useAppStore();
+
+const showPageHelp = () => {
+  const steps = tourSteps[route.path] || [];
+  appStore.startTour(steps);
+};
 
 const { t } = useI18n();
 
@@ -123,29 +140,29 @@ interface MenuItem {
 }
 
 const bottomItems = computed<MenuItem[]>(() => [
-  {
-    text: t("settings"),
-    value: "settings",
-    // icon: "mid-account-group-outline",
-    icon: "mdi-cog",
-    to: "/settings",
-    id: "settings",
-  },
-  {
-    text: "Page Help",
-    value: "help",
-    // icon: "mid-account-group-outline",
-    icon: "mdi-help-circle-outline",
-    to: "/bugs",
-    id: "page-help",
-  },
   // {
-  //   text: t("Report a bug"),
-  //   value: "bug",
+  //   text: "App Settings",
+  //   value: "settings",
   //   // icon: "mid-account-group-outline",
-  //   icon: "mdi-bug",
-  //   to: "/bugs",
+  //   icon: "mdi-cog",
+  //   to: "/settings",
+  //   id: "settings",
   // },
+  // {
+  //   text: "Page Help",
+  //   value: "help",
+  //   // icon: "mid-account-group-outline",
+  //   icon: "mdi-help-circle-outline",
+  //   to: "/bugs",
+  //   id: "page-help",
+  // },
+  {
+    text: t("Report a bug"),
+    value: "bug",
+    // icon: "mid-account-group-outline",
+    icon: "mdi-bug",
+    to: "/bugs",
+  },
   // { text: "Backups", icon: "mdi-cloud-upload" },
 ]);
 
@@ -155,52 +172,62 @@ const items = computed<MenuItem[]>(() => [
     value: "overview",
     // icon: "mdi-monitor-dashboard",
     icon: "mdi-view-dashboard",
-    to: "/dashboard/",
+    // to: "/dashboard/",
+    to: "/dashboard/overview",
     id: "dashboard-page",
-    subItems: [
-      {
-        text: "Overview",
-        value: "overview",
-        icon: "mdi-square",
-        id: "overview-page",
-        to: "/dashboard/overview",
-      },
-      {
-        text: "Time Tables",
-        value: "time_tables",
-        icon: "mdi-clock",
-        id: "timetables-page",
-        to: "/dashboard/time_tables",
-      },
-      {
-        text: "Internet Usage",
-        value: "internet_usage",
-        icon: "mdi-link",
-        id: "internet-usage-page",
-        to: "/dashboard/internet_usage",
-      },
-      // {
-      //   text: "App Usage",
-      //   value: "app_usage",
-      //   icon: "mdi-application",
-      //   to: "/dashboard/app_usage",
-      // },
-      {
-        text: "Screenshots",
-        value: "screenshots",
-        icon: "mdi-image",
-        id: "screenshots-page",
-        to: "/dashboard/screenshots",
-      },
-      {
-        text: "Key Loggers",
-        value: "keyloggers",
-        icon: "mdi-keyboard",
-        id: "keyloggers-page",
-        to: "/dashboard/keyloggers",
-      },
-    ],
   },
+  // subItems: [
+  // {
+  //   text: "Overview",
+  //   value: "overview",
+  //   icon: "mdi-monitor-dashboard",
+  //   id: "overview-page",
+  //   to: "/dashboard/overview",
+  // },
+  {
+    text: "Surveilance Room",
+    value: "surveilance_room",
+    icon: "mdi-cctv",
+    id: "surveilance-room-page",
+    to: "/surveilance_room",
+  },
+
+  {
+    text: "Time Tables",
+    value: "time_tables",
+    icon: "mdi-calendar",
+    id: "timetables-page",
+    to: "/dashboard/time_tables",
+  },
+  {
+    text: "Internet Usage",
+    value: "internet_usage",
+    icon: "mdi-web",
+    id: "internet-usage-page",
+    to: "/dashboard/internet_usage",
+  },
+  // {
+  //   text: "App Usage",
+  //   value: "app_usage",
+  //   icon: "mdi-application",
+  //   to: "/dashboard/app_usage",
+  // },
+  {
+    text: "Screenshots",
+    value: "screenshots",
+    icon: "mdi-image",
+    id: "screenshots-page",
+    to: "/dashboard/screenshots",
+  },
+  {
+    text: "Key Loggers",
+    value: "keyloggers",
+    icon: "mdi-keyboard",
+    id: "keyloggers-page",
+    to: "/dashboard/keyloggers",
+  },
+  // ],
+  // },
   {
     text: t("proxy_config"),
     icon: "mdi-server-network",
@@ -249,13 +276,14 @@ const items = computed<MenuItem[]>(() => [
       // },
     ],
   },
-  {
-    text: "App Settings",
-    value: "apps",
-    icon: "mdi-application",
-    id: "settings-page",
-    to: "/apps",
-  },
+  // {
+  //   text: "App Settings",
+  //   value: "apps",
+  //   icon: "mdi-application",
+  //   id: "settings-page",
+  //   to: "/apps",
+  // },
+
   // {
   //   text: t("apps"),
   //   value: "apps",
