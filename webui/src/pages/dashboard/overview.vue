@@ -2,7 +2,6 @@
 <template>
   <div>
     <!-- <FilterBar class="position-fixed w-100" style="z-index: 1000" /> -->
-    <FilterBar />
 
     <!-- <UsersListDrawer -->
     <!--   :showDrawer="showUsersDrawer" -->
@@ -49,12 +48,15 @@
     <!-- <v-window-item :transition="false" :value="1"> -->
     <!-- <SparkLines /> -->
 
+    <!-- <FilterBar /> -->
     <v-container max-width="1400px">
-      <Summaries />
-
-      <div class="mt-4 mb-4">
-        <ActiveUsersListHorizontal />
+      <div class="mb-2">
+        <Summaries />
       </div>
+
+      <!-- <div class="mb-2"> -->
+      <!--   <ActiveUsersListHorizontal /> -->
+      <!-- </div> -->
       <!-- <v-card class="mx-4 mb-4" rounded> -->
       <!--   <v-toolbar class="px-4" height="54"> -->
       <!--     <h2 class="text-h6">Screenshots Timeline</h2> -->
@@ -132,67 +134,97 @@
       <!-- </v-lazy> -->
       <!-- </v-window-item> -->
       <!-- </v-window> -->
-      <!-- <div class="d-flex mb-4" style="max-height: 600px"> -->
-      <!--   <RoundedCard class="me-0"> -->
-      <!--     <div> -->
-      <!--       <CardToolbar title="Time Spent on computers Past Week" /> -->
-      <!--       <BarChart /> -->
+      <div class="d-flex mb-2">
+        <div class="d-flex flex-column flex-grow-1 me-2" style="min-width: 0">
+          <div class="d-flex flex-column w-100 mb-2">
+            <RoundedCard class="me-0">
+              <div>
+                <CardToolbar title="Time Spent on computers Past Week">
+                  <!-- <DropdownGroupsMenu /> -->
+                </CardToolbar>
+                <BarChart />
+              </div>
+            </RoundedCard>
+          </div>
+          <RoundedCard class="me-2" height="730">
+            <CardToolbar title="Most Visited Websites"> </CardToolbar>
+            <MostVisitedWebsites />
+          </RoundedCard>
+        </div>
+        <div>
+          <div class="d-flex flex-column">
+            <RoundedCard class="me-2 mb-2">
+              <div>
+                <CardToolbar title="Most Productive Users">
+                  <!-- <DropdownGroupsMenu /> -->
+                </CardToolbar>
+                <UsersList />
+              </div>
+            </RoundedCard>
+            <RoundedCard class="me-0">
+              <div>
+                <CardToolbar title="Most Active Users">
+                  <!-- <DropdownGroupsMenu /> -->
+                </CardToolbar>
+                <UsersList />
+              </div>
+            </RoundedCard>
+          </div>
+          <!-- <div class="d-flex mt-4"> -->
+          <!--   <RoundedCard class="me-2"> -->
+          <!--     <div> -->
+          <!--       <CardToolbar title="Most Active Users" /> -->
+          <!--       <UsersList /> -->
+          <!--     </div> -->
+          <!--   </RoundedCard> -->
+          <!--   <RoundedCard> -->
+          <!--     <div> -->
+          <!--       <CardToolbar title="Most Productive Users" /> -->
+          <!--       <UsersList /> -->
+          <!--     </div> -->
+          <!--   </RoundedCard> -->
+          <!-- </div> -->
+          <!-- <div class="d-flex mb-4"> -->
+          <!-- <RoundedCard> -->
+          <!--   <CardToolbar title="Most Banned Categories" /> -->
+          <!--   <div class="px-4 flex-md-grow-1"> -->
+          <!--     <EPieChart /> -->
+          <!--     <WebsitesList /> -->
+          <!--   </div> -->
+          <!-- </RoundedCard> -->
+          <!-- </div> -->
+          <div class="d-flex mt-2">
+            <RoundedCard class="me-0 me-2">
+              <div>
+                <CardToolbar title="Most Used Apps" />
+                <AppsList />
+              </div>
+            </RoundedCard>
+            <RoundedCard>
+              <div>
+                <CardToolbar title="Most Occuring Window Titles" />
+                <AppsList />
+              </div>
+            </RoundedCard>
+            <!-- <RoundedCard> -->
+            <!--   <div> -->
+            <!--     <CardToolbar title="Apps Used Categories" /> -->
+            <!--     <CategoriesList /> -->
+
+            <!--   </div> -->
+            <!-- </RoundedCard> -->
+          </div>
+        </div>
+      </div>
+      <!-- <RoundedCard class="me-0 me-2 mb-2"> -->
+      <!--   <div> -->
+      <!--     <CardToolbar title="Requests Rate" /> -->
+      <!--     <div class="px-4"> -->
+      <!--       <ELineChart2 /> -->
+      <!--       <LoadingTable /> -->
       <!--     </div> -->
-      <!--   </RoundedCard> -->
-      <!-- </div> -->
-      <div class="d-flex" style="max-height: 600px">
-        <RoundedCard class="me-0">
-          <div>
-            <CardToolbar title="Time Spent on computers Past Week" />
-            <div class="px-2">
-              <EHeatmap />
-              <EHeatmap />
-              <EHeatmap />
-            </div>
-          </div>
-          <v-pagination
-            rounded
-            density="compact"
-            v-model="page"
-            :length="pageCount"
-          ></v-pagination>
-        </RoundedCard>
-      </div>
-      <div class="d-flex mt-4">
-        <RoundedCard class="me-2">
-          <div>
-            <CardToolbar title="Most Active Users" />
-            <UsersList />
-          </div>
-        </RoundedCard>
-        <RoundedCard>
-          <div>
-            <CardToolbar title="Most Productive Users" />
-            <UsersList />
-          </div>
-        </RoundedCard>
-      </div>
-      <div class="d-flex mt-4">
-        <RoundedCard class="me-0 me-2">
-          <div>
-            <CardToolbar title="Most Used Apps" />
-            <AppsList />
-          </div>
-        </RoundedCard>
-        <RoundedCard class="me-2">
-          <div>
-            <CardToolbar title="Most Occuring Window Titles" />
-            <AppsList />
-          </div>
-        </RoundedCard>
-        <RoundedCard>
-          <div>
-            <CardToolbar title="Apps Used Categories" />
-            <CategoriesList />
-            <!-- <ETreeMap /> -->
-          </div>
-        </RoundedCard>
-      </div>
+      <!--   </div> -->
+      <!-- </RoundedCard> -->
     </v-container>
   </div>
 </template>
@@ -225,5 +257,6 @@ const tabs = [
     icon: "mdi-google",
   },
 ];
+
 const activeTab = ref(1);
 </script>
