@@ -74,6 +74,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import { VueDraggable } from "vue-draggable-plus";
 
 const props = defineProps<{
   title: string;
