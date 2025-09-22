@@ -1,0 +1,4 @@
+** Fixes
+Firefox no secure connection issue:
+
+Make sure you have security.cert_pinning.enforcement_level set to 1 in your about:config.
